@@ -1,0 +1,398 @@
+@mixin regular-font ($breakpoint) {
+    font-weight: 400;
+    line-height: 1.25rem;
+    letter-spacing: 0.01em;
+
+    @if $breakpoint == wideScreen {
+        font-size: 1.5rem;
+    }
+
+    @if $breakpoint == regularScreen {
+        font-size: 1.125rem;
+    }
+
+    @if $breakpoint == tablet {
+        font-size: 1rem;
+    }
+
+    @if $breakpoint == mobile {
+        font-size: 1.125rem;
+    }
+    
+}
+
+.card-container {
+    border-radius: 0.625rem;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+    background: #fff;
+}
+
+.orange-border {
+    border: 0.125rem solid #FFB64F;
+}
+
+.turquoise-border {
+    border: 0.125rem solid #7CE3E1;
+}
+
+.black-border {
+    border: 0.125rem solid #000;
+}
+
+.card-header {
+    background-color: #FFF;
+}
+
+.orange {
+    background-color: #FFB64F;
+}
+
+.turquoise {
+    background-color: #7CE3E1;
+}
+
+.black {
+    background-color: #000;
+}
+
+.header-radius {
+    border-top-left-radius: 0.625rem;
+    border-top-right-radius: 0.625rem;
+}
+
+.header-wrapper {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    padding: 0px 15px 0px 30px;
+    height: 10.25rem;
+    align-items: center;
+}
+
+.white-text {
+    color: #fff;
+}
+
+.card-title {
+    font-size: 2.25rem;
+    font-weight: 500;
+    line-height: 2.25rem;
+    letter-spacing: 0.01em;
+    text-align: left;
+    margin-bottom: 0.9375rem;
+}
+
+.card-description {
+    @include regular-font(wideScreen);
+    text-align: left;
+    margin: 0;
+    margin-bottom: 1.875rem;
+}
+
+.card-icon {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-icon.bulb {
+    background-image: url(./icons/1CardIcon.svg);
+    height: 5.2rem;
+    width: 5.7rem;
+}
+
+.card-icon.target {
+    background-image: url(./icons/2CardIcon.svg);
+    height: 6rem;
+    width: 6.5rem;
+}
+
+.card-icon.laptop {
+    background-image: url(./icons/3CardIcon.svg);
+    height: 5rem;
+    width: 6rem;
+}
+
+.card-body {
+    padding: 0.75rem 0.9375rem 1.5625rem 1.875rem;
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.5fr;
+    row-gap: 3.4375rem;
+}
+
+.rate-price {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 0.75rem;
+}
+
+.current-rate-badge {
+    font-size: 1.25rem;
+    color: #fff;
+    background-color: #3BA5E0;
+    border-radius: 0.625rem;
+    justify-self: flex-end;
+    padding: 0.3em 1em;
+    align-self: center;
+}
+
+.not-active {
+    background-color: #FFF;
+    color: #fff
+}
+
+.price-wrapper {
+    display: flex;
+}
+
+.price {
+    margin-right: 1.25rem;
+    font-size: 2.25rem;
+    font-weight: 500;
+    align-self: center;
+}
+
+.saled {
+    margin-right: 0;
+    color: gray;
+    text-decoration: line-through;
+    font-size: 1.9375rem;
+}
+
+.installment-rate {
+    @include regular-font(wideScreen);
+}
+
+.rate-perks {
+    font-size: 1.625rem;
+    font-weight: 500;
+    line-height: 1.5re,;
+    letter-spacing: 0.01em;
+}
+
+.perks-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include regular-font(wideScreen);
+}
+
+.perks-list li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.perks-list li::before {
+    content: url(./icons/checkIcon.svg);
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.perks-list li:not(:last-child) {
+    margin-bottom: 0.625rem;
+}
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-wrapper button {
+    width: 100%;
+    font-size: 1.625rem;
+    padding: 1em 2.5em;
+}
+
+
+@media (max-width: 1920px) {
+
+    .header-wrapper {
+        height: 8.25rem;
+    }
+
+    .card-title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+
+    .current-rate-badge {
+        font-size: 0.875rem;
+        line-height: 1.0625rem;
+    }
+
+    .price {
+        font-size: 1.875rem;
+    }
+
+    .card-description {
+        @include regular-font(regularScreen);
+    }
+
+    .installment-rate {
+        @include regular-font(regularScreen);
+    }
+
+    .perks-list {
+        @include regular-font(regularScreen);
+    }
+
+    .button-wrapper button {
+        font-size: 1.25rem;
+    }
+    
+    .card-icon.bulb {
+        height: 4.2rem;
+        width: 4.7rem;
+    }
+}
+
+@media (max-width: 1400px) {
+
+    .card-title {
+        font-size: 1.625rem;
+        line-height: 2.25rem;
+        margin-bottom: 0.3125rem;
+    }
+
+    .card-icon.bulb {
+        height: 4.2rem;
+        width: 4.7rem;
+    }
+    
+    .card-icon.target {
+        height: 5rem;
+        width: 5.5rem;
+    }
+    
+    .card-icon.laptop {
+        height: 4rem;
+        width: 5rem;
+    }
+
+    .card-body {
+        height: 32.65625rem;
+    }
+
+    .current-rate-badge {
+        font-size: 0.75rem;
+        line-height: 1.0625rem;
+    }
+
+    .price {
+        font-size: 1.625rem;
+    }
+
+    .card-description {
+        @include regular-font(tablet);
+    }
+
+    .installment-rate {
+        @include regular-font(tablet);
+    }
+
+    .perks-list {
+        @include regular-font(tablet);
+    }
+    
+    .perks-list li:not(:last-child) {
+        margin-bottom: 0.3125rem;
+    }
+
+    .button-wrapper button {
+        font-size: 1rem;
+        padding: 1em 1.5em;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .card-title {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 0.3125rem;
+    }
+
+    .current-rate-badge {
+        font-size: 0.75rem;
+        line-height: 1.0625rem;
+    }
+    
+    .perks-list li:not(:last-child) {
+        margin-bottom: 0;
+    }
+
+    .button-wrapper button {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 980px) {
+
+    .card-body {
+        row-gap: 1rem;
+    }
+}
+
+@media (max-width: 980px) {
+
+    .card-container {
+        height: 35rem;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+    }
+
+    .card-body {
+        height: calc(32rem - 8.25rem);
+        padding: 1.25rem 1.5rem 1.95rem 1.5rem;
+        grid-template-rows: 1fr 3fr 1fr
+    }
+
+    .current-rate-badge, .rate-badge-empty {
+        display: none;
+    }
+
+    .rate-price {
+        grid-template-rows: 2.25rem 2.75rem;
+    }
+
+    .price {
+        font-size: 1.875rem;
+    }
+
+    .card-description {
+        @include regular-font(mobile);
+    }
+
+    .installment-rate {
+        @include regular-font(mobile);
+    }
+
+    .perks-list {
+        font-size: 1rem;
+    }
+
+    .button-wrapper button {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 500px) {
+    
+    .card-body {
+        grid-template-rows: 1fr 1.5fr 1fr;
+    }
+
+    .rate-perks {
+        font-size: 1.125rem;
+    }
+}
+
+@media (max-width: 360px) {
+    
+    .button-wrapper button {
+        font-size: 0.9rem;
+    }
+}

@@ -1,0 +1,255 @@
+@mixin font($breakpoint) {
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    color: #949494;
+
+    @if $breakpoint == wideScreen {
+        font-size: 18px;
+    }
+
+    @if $breakpoint == regularScreen {
+        font-size: 16px;
+    }
+
+    @if $breakpoint == tablet {
+        font-size: 14px;
+    }
+}
+
+.authorization-form-container {
+    position: relative;
+    margin: 0;
+    margin-bottom: 30px;
+    padding: 40px 25px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+    width: 26.8rem;
+}
+
+.lock-icon {
+    position: absolute;
+    top: -60px;
+    left: -50px;
+}
+
+.authorization-form-buttons-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.authorization-form-button {
+    padding: 0.2rem 1.5rem;
+    background-color: #FFF;
+    color: #C7C7C7;
+    @include font(wideScreen);
+    border: none;
+    border-bottom: 2px #C7C7C7 solid;
+    text-align: center;
+    cursor: pointer;
+}
+
+.authorization-form-button.active {
+    color: #029491;
+    border-bottom: 2px #029491 solid;
+}
+
+.authorization-input-form {
+    margin-top: 40px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 0.9fr auto;
+    row-gap: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label {
+    margin-bottom: 15px;
+    @include font(wideScreen)
+}
+
+.input-wrapper input {
+    border-radius: 5px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+    height: 2.7rem;
+    padding: 0 15px;
+    @include font(wideScreen);
+    color: black;
+}
+
+.incorrect-input {
+    border: 1px solid #FF5959 !important; 
+}
+
+.incorrect-input:focus {
+    outline: none;
+    border: 1px solid #FF5959 !important;
+}
+
+.input-error-message {
+    height: 15px;
+    font-size: 0.75rem;
+    letter-spacing: 0.0075rem;
+    margin: 0;
+    text-align: center;
+    color: #FF5959ed;
+    margin-top: 0.3rem;
+}
+
+.authorization-form-submit-button {
+    font-family: Inter;
+    color: #FFF;
+    font-size: 26px;
+    font-weight: 500;
+    border: none;
+    border-radius: 5px;
+    background: #5970FF;
+    opacity: 50%;
+    height: 3.6875rem;
+    align-self: center;
+}
+
+.authorization-form-submit-button.active {
+    opacity: 100%;
+    cursor: pointer;
+}
+
+.restore-password-link {
+    color: #5970FF;
+    text-align: center;
+}
+
+.restore-password-link:visited {
+    color: #5970FF;
+}
+
+.alternative-login-menu {
+    margin-top: 30px;
+}
+
+.alternative-login-menu p {
+    @include font(wideScreen);
+}
+
+.alternative-login-options {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.alternative-login {
+    cursor: pointer;
+    height: 1.93rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.alternative-login.google {
+    width: 100%;
+    background-image: url(../../Icons/google-icon.svg);
+}
+
+.alternative-login.facebook {
+    width: 100%;
+    background-image: url(../../Icons/facebook-icon.svg);
+}
+
+.alternative-login.yandex {
+    width: 100%;
+    background-image: url(../../Icons/yandex-icon.svg);
+}
+
+.alternative-login:not(:last-child) {
+    margin-right: 15px;
+}
+
+
+@media (max-width: 1920px) {
+
+    .authorization-form-button {
+        @include font(regularScreen);
+    }
+
+    .input-wrapper label {
+        @include font(regularScreen);
+    }
+
+    .input-wrapper input {
+        @include font(regularScreen);
+    }
+    
+    .alternative-login-menu p {
+        @include font(regularScreen);
+    }
+
+    .authorization-form-submit-button {
+        font-size: 22px;
+    }
+
+    .restore-password-link {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 1450px) {
+
+    .authorization-form-container {
+        width: 20.5rem;
+    }
+}
+
+@media (max-width: 980px) {
+    
+    .lock-icon {
+        left: 5rem;
+    }
+
+    .authorization-form-container {
+        margin: 0;
+    }
+
+    .authorization-form-button {
+        @include font(tablet);
+    }
+
+    .input-wrapper label {
+        @include font(tablet);
+    }
+
+    .input-wrapper input {
+        @include font(tablet);
+    }
+    
+    .alternative-login-menu p {
+        @include font(tablet);
+    }
+
+    .authorization-form-submit-button {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .lock-icon {
+        top: -4.5rem;
+    }
+    
+    .authorization-form-container {
+        padding: 1.5rem 0.9rem 1.25rem 0.94rem;
+        width: 16.5rem;
+    }
+
+    .authorization-form-button {
+        padding: 0.2rem 0.5rem;
+    }
+}
