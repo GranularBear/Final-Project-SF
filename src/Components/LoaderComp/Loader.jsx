@@ -1,8 +1,8 @@
 import React from "react";
 
-import './Loader.scss';
-
 import loaderImage from '../../Icons/loader-icon.jpg';
+
+import './Loader.scss';
 
 const Loader = () => {
 

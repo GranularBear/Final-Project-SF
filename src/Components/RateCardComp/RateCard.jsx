@@ -1,8 +1,8 @@
 import React from "react";
 
-import './RateCard.scss';
-
 import Button from "../ButtonComp/Button";
+
+import './RateCard.scss';
 
 const RateCard = (props) => {
 
@@ -53,8 +53,8 @@ const RateCard = (props) => {
                 </div>
                 <div className='button-wrapper'>
                     {props.active ? 
-                        <Button color='#D2D2D2' textColor='#000' text='Перейти в личный кабинет' /> 
-                        : <Button color='#5970FF' textColor='#FFF' text='Подробнее' />
+                        <Button backgroundColor='#D2D2D2' textColor='#000' text='Перейти в личный кабинет' className={'rate-card_button'} /> 
+                        : <Button backgroundColor='#5970FF' textColor='#FFF' text='Подробнее' className={'rate-card_button'}/>
                     }
                 </div>
             </div>

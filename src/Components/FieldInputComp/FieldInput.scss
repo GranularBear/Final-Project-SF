@@ -38,11 +38,40 @@
     @include font(wideScreen);
 }
 
-// .select-input {
-//     -webkit-appearance: none;
-//     appearance: none;
-//     // width: 100%;
-// }
+.checkbox-wrapper {
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox-label {
+    margin: 0;
+    order: 2;
+    height: 1rem;
+}
+
+.checkbox-input {
+    margin: 0;
+    margin-right: 1.25rem;
+    width: 0;
+    height: 0;
+}
+
+.checkbox-label::before {
+    display: inline-block;
+    content: '';
+    text-align: center;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 1.25rem;
+    background-color: #fff;
+    border: 1px solid #000;
+    cursor: pointer;
+    margin-bottom: -.06rem;
+}
+
+.checkbox-input:checked + .checkbox-label::before {
+    content: url(../../Icons/checkmark_icon.svg);
+}
 
 .date-range-picker {
     display: flex;

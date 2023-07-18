@@ -4,9 +4,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Select, { components } from 'react-select';
 import PropTypes from 'prop-types';
 
-import './FieldInput.scss';
-
 import CustomArrow from '../../Icons/gray-arrow_pointed-down-icon.jpg'
+
+import './FieldInput.scss';
 
 const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName, inputClassName, placeholder, options, htmlFor, errorMessage, onChange, onChange_2, startDate, endDate,...otherProps }) => {
     const startDateInputRef = useRef(null);
@@ -46,7 +46,6 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
     }, [isWideScreen, isRegularScreen, isTablet]);
 
     const DropdownIndicator = (props) => {
-        console.log('1')
         return (
             <components.DropdownIndicator {...props}>
                 <img src={CustomArrow} alt='dropdown arrow'/>
@@ -85,9 +84,27 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
     }
 
     return (
-        <div className={`field-wrapper ${wrapperClassName}`}>
+        type === 'checkbox'
+        ?
+        <div className={`field-wrapper checkbox-wrapper ${wrapperClassName}`}>
+            <input
+                className={`field-input checkbox-input ${inputClassName}`}
+                type="checkbox"
+                required={isRequired}
+                onChange={onChange}
+                {...otherProps}
+            />
             <label
-                className={`field-label ${labelClassName}`}
+                className={`field-label checkbox-label ${labelClassName}`}
+                htmlFor={htmlFor}
+            >
+                {label}
+            </label>
+        </div>
+        :
+        <div className={`field-wrapper ${type + '-wrapper'} ${wrapperClassName}`}>
+            <label
+                className={`field-label ${type + '-label'} ${labelClassName}`}
                 htmlFor={htmlFor}
             >
                 {label}{isRequired && ' *'}
@@ -103,6 +120,7 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                             styles={customSelectStyles}
                             components={{ DropdownIndicator, IndicatorSeparator: () => null }}
                             placeholder={'Выберите тональность'}
+                            onChange={onChange}
                             {...otherProps}
                         >
                         </Select>
@@ -140,7 +158,7 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                     </div>
                 :
                     <input
-                        className={`field-input ${inputClassName}`}
+                        className={`field-input ${type + '-input'} ${inputClassName}`}
                         type={type}
                         required={isRequired}
                         placeholder={placeholder}

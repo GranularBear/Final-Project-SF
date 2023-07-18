@@ -198,7 +198,7 @@
     justify-content: center;
 }
 
-.button-wrapper button {
+.rate-card_button {
     width: 100%;
     font-size: 1.625rem;
     padding: 1em 2.5em;
@@ -237,7 +237,7 @@
         @include regular-font(regularScreen);
     }
 
-    .button-wrapper button {
+    .rate-card_button {
         font-size: 1.25rem;
     }
     
@@ -299,7 +299,7 @@
         margin-bottom: 0.3125rem;
     }
 
-    .button-wrapper button {
+    .rate-card_button {
         font-size: 1rem;
         padding: 1em 1.5em;
     }
@@ -322,7 +322,7 @@
         margin-bottom: 0;
     }
 
-    .button-wrapper button {
+    .rate-card_button {
         font-size: 0.875rem;
     }
 }
@@ -374,7 +374,7 @@
         font-size: 1rem;
     }
 
-    .button-wrapper button {
+    .rate-card_button {
         font-size: 1.125rem;
     }
 }
@@ -392,7 +392,7 @@
 
 @media (max-width: 360px) {
     
-    .button-wrapper button {
+    .rate-card_button {
         font-size: 0.9rem;
     }
 }

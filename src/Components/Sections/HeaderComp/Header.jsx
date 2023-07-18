@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../../AuthContext";
 
-import './Header.scss';
-
 import userIcon from '../../../Icons/user-icon.jpg';
 
 import UserStatisticsMenu from "../../UserStatisticsMenuComp/UserStatisticsMenu";
+import Button from "../../ButtonComp/Button";
+
+import './Header.scss';
 
 const Header = (props) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,13 +46,13 @@ const Header = (props) => {
                 <UserStatisticsMenu />
                 }
                 {!isLoggedIn && <div className='btn-menu'>
-                    <button className="sign-up btn">Зарегистрироваться</button>
-                    <NavLink to={`/authorization`} className="authorize btn">Войти</NavLink>
+                    <Button text={'Зарегистрироваться'} className={'header_signUp header_button'} />
+                    <NavLink to={`/authorization`}><Button text={'Войти'} className={'header_authorize header_button'} /></NavLink>
                 </div>}
                 {isLoggedIn && <div className="user-menu">
                     <div className="user-info">
                         <p className="username">Андрей В.</p>
-                        <button className="sign-out btn" onClick={handleLogOut}>Выйти</button>
+                        <Button text={'Выйти'} className={'header_signOut header_button'} onClick={handleLogOut} />
                     </div>
                     <img className="user-pic" src={userIcon} width='50px' alt="user"></img>
                 </div>}
@@ -79,11 +80,12 @@ const Header = (props) => {
                         </ul>
                         {!isLoggedIn ?
                             <>
-                                <button className="sign-up btn">Зарегистрироваться</button>
-                                <NavLink to={`/authorization`} className="authorize btn">Войти</NavLink>
+                                <Button text={'Зарегистрироваться'} className={'header_signUp header_button'} />
+                                <NavLink to={`/authorization`}><Button text={'Войти'} className={'header_authorize header_button'} /></NavLink>
                             </>
-                        :   <>
-                                <button className="authorize btn" onClick={handleLogOut}>Выйти</button>
+                        :   
+                            <>
+                                <Button text={'Выйти'} className={'header_button header_authorize'} onClick={handleLogOut} />
                             </>
                         }
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import './MainDescription.scss'
-
 import Button from "../../../ButtonComp/Button";
+
+import './MainDescription.scss'
 
 
 const MainDescription = () => {
@@ -36,7 +36,7 @@ const MainDescription = () => {
                 <p className="main-description">Комплексный анализ публикаций, получение данных<br/> в формате PDF на электронную почту.</p>
                 : <p className="main-description">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>
                 }
-                <NavLink to={`/search`}><Button color='#5970FF' textColor='#FFF' text='Запросить данные' /></NavLink>
+                <NavLink to={`/search`}><Button backgroundColor='#5970FF' textColor='#FFF' text='Запросить данные' className={'main_request-data_button'} /></NavLink>
             </div>
             <div className="main-image-wrapper"></div>
         </div>

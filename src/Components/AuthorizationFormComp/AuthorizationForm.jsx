@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../AuthContext";
 
 import FieldInput from "../FieldInputComp/FieldInput";
+import Button from "../ButtonComp/Button";
 
 import './AuthorizationForm.scss';
 
@@ -99,19 +100,19 @@ const AuthorizationForm = () => {
                 </svg>
             </div>
             <div className="authorization-form-buttons-wrapper">
-                <button className="authorization-form-button sign-in active">Войти</button>
-                <button className="authorization-form-button sign-up">Зарегистрироваться</button>
+                <Button text={'Войти'} className={'authorization-form-button sign-in active'} />
+                <Button text={'Зарегистрироваться'} className={"authorization-form-button sign-up"} />
             </div>
             <form className="authorization-input-form" onSubmit={handleSubmit}>
                 <FieldInput
                     type={'text'}
                     label={'Логин или номер телефона:'}
-                    htmlFor={'login'}
+                    htmlFor={'authorizationField_userLogin'}
                     wrapperClassName={'authorization-input-wrapper login'}
                     labelClassName={'authorization-input-field-label'}
                     inputClassName={`authorization-input-field-value ${loginValid ? '' : 'incorrect-input'}`}
-                    id={'login'}
-                    name={'login'}
+                    id={'authorizationField_userLogin'}
+                    name={'authorizationField_userLogin'}
                     value={loginValue}
                     onChange={handleLoginChange}
                     errorMessage={!loginValid && 'Введите корректные данные'}
@@ -120,17 +121,18 @@ const AuthorizationForm = () => {
                 <FieldInput
                     type={'password'}
                     label={'Пароль:'}
-                    htmlFor={'password'}
+                    htmlFor={'authorizationField_userPassword'}
                     wrapperClassName={'authorization-input-wrapper password'}
                     labelClassName={'authorization-input-field-label'}
                     inputClassName={`authorization-input-field-value ${error === '' ? '' : 'incorrect-input'}`}
-                    id={'password'}
-                    name={'passwrpd'}
+                    id={'authorizationField_userPassword'}
+                    name={'authorizationField_userPassword'}
                     value={passwordValue}
                     onChange={handlePasswordChange}
                     errorMessage={error && `${error}`}
                 />
-                <input type="submit" value='Войти' className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled}></input>
+                {/* <input type="submit" value='Войти' className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled}></input> */}
+                <Button type={'submit'} text={'Войти'} className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled} />
                 <a className="restore-password-link" href="#">Восстановить пароль</a>
             </form>
             <div className="alternative-login-menu">

@@ -81,27 +81,35 @@
     align-items: center
 }
 
-.btn {
+.header_button {
     @include font(wideScreen);
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-    text-decoration: none;
+
 }
 
-.sign-up {
+.header_signUp {
+    padding: 0;
     padding-right: 1rem;
+    align-self: center;
+    background-color: transparent;
+    border-radius: 0;
     color: gray;
+    font-weight: 400;
     border-right: 2px solid #029491;
 }
 
-.authorize {
+.header_authorize {
     background-color: #7CE3E1;
     padding: 0.5rem;
-    border-radius: 5px;
-    font-weight: 500;
     color: black;
+}
+
+.header_signOut {
+    font-size: 0.75rem;
+    color: gray;
+    text-align: end;
+    padding: 0;
+    background-color: transparent;
+    font-weight: 400;
 }
 
 .user-menu {
@@ -118,12 +126,6 @@
 .username {
     margin: 0;
     margin-bottom: 0.2rem;
-}
-
-.sign-out {
-    font-size: 0.75rem;
-    color: gray;
-    text-align: end;
 }
 
 .user-pic {
@@ -308,31 +310,31 @@
     margin-bottom: 25px;
 }
 
-.dropdown-menu .btn {
+.dropdown-menu .header_button {
     opacity: 0;
     transition: opacity, 0.4s ease;
 }
 
-.dropdown-menu.open .sign-up {
+.dropdown-menu.open .header_signUp {
     opacity: 50%;
     transition: opacity, 0.4s ease;
     border: none;
 }
 
-.dropdown-menu.open .authorize {
+.dropdown-menu.open .header_authorize {
     opacity: 100%;
     transition: opacity, 0.4s ease;
 
 }
 
-.dropdown-menu .sign-up {
+.dropdown-menu .header_signUp {
     font-size: 16px;
     padding: 0;
     color: #FFF;
     margin-bottom: 20px;
 }
 
-.dropdown-menu .authorize {
+.dropdown-menu .header_authorize {
     padding: 0.7rem 8rem;
 }
 
@@ -370,7 +372,7 @@
         @include font(regularScreen);
     }
 
-    .btn {
+    .header_button {
         @include font(regularScreen);
     }
 }
