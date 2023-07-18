@@ -3,7 +3,6 @@
     font-weight: 400;
     line-height: 19px;
     letter-spacing: 0.02em;
-    color: #949494;
 
     @if $breakpoint == wideScreen {
         font-size: 18px;
@@ -63,24 +62,16 @@
     row-gap: 20px;
 }
 
-.input-wrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-wrapper label {
+.authorization-input-wrapper {
     margin-bottom: 15px;
-    @include font(wideScreen)
 }
 
-.input-wrapper input {
-    border-radius: 5px;
-    border: 1px solid #C7C7C7;
-    background: #FFF;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
-    height: 2.7rem;
-    padding: 0 15px;
-    @include font(wideScreen);
+.authorization-input-field-label {
+    margin-bottom: 15px;
+    color: #949494;
+}
+
+.authorization-input-field-value {
     color: black;
 }
 
@@ -91,16 +82,6 @@
 .incorrect-input:focus {
     outline: none;
     border: 1px solid #FF5959 !important;
-}
-
-.input-error-message {
-    height: 15px;
-    font-size: 0.75rem;
-    letter-spacing: 0.0075rem;
-    margin: 0;
-    text-align: center;
-    color: #FF5959ed;
-    margin-top: 0.3rem;
 }
 
 .authorization-form-submit-button {
@@ -132,6 +113,7 @@
 
 .alternative-login-menu {
     margin-top: 30px;
+    color: #949494;
 }
 
 .alternative-login-menu p {
@@ -178,14 +160,6 @@
     .authorization-form-button {
         @include font(regularScreen);
     }
-
-    .input-wrapper label {
-        @include font(regularScreen);
-    }
-
-    .input-wrapper input {
-        @include font(regularScreen);
-    }
     
     .alternative-login-menu p {
         @include font(regularScreen);
@@ -218,14 +192,6 @@
     }
 
     .authorization-form-button {
-        @include font(tablet);
-    }
-
-    .input-wrapper label {
-        @include font(tablet);
-    }
-
-    .input-wrapper input {
         @include font(tablet);
     }
     

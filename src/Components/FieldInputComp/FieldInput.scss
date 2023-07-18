@@ -1,0 +1,106 @@
+@mixin font($breakpoint) {
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+
+    @if $breakpoint == wideScreen {
+        font-size: 18px;
+    }
+
+    @if $breakpoint == regularScreen {
+        font-size: 16px;
+    }
+
+    @if $breakpoint == tablet {
+        font-size: 14px;
+    }
+}
+
+.field-wrapper {
+    display: flex;
+    flex-direction: column;
+    @include font(wideScreen)
+}
+
+.field-label {
+    @include font(wideScreen);
+    margin-bottom: 1.25rem;
+}
+
+.field-input {
+    border-radius: 5px;
+    border: 1px solid #C7C7C7;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.05);
+    height: 2.7rem;
+    padding: 0 15px;
+    @include font(wideScreen);
+}
+
+// .select-input {
+//     -webkit-appearance: none;
+//     appearance: none;
+//     // width: 100%;
+// }
+
+.date-range-picker {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.select-input-container,
+.date-picker-container {
+    position: relative;
+    display: inline-block;
+}
+
+.date-picker {
+    padding-right: 20px;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 7%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../../Icons/gray-arrow_pointed-down-icon.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.input-error-message {
+    height: 15px;
+    font-size: 0.75rem;
+    letter-spacing: 0.0075rem;
+    margin: 0;
+    text-align: center;
+    color: #FF5959ed;
+    margin-top: 0.3rem;
+}
+
+@media (max-width: 1920px) {
+    
+    .field-label {
+        @include font(regularScreen);
+    }
+
+    .field-input {
+        @include font(regularScreen)
+    }
+}
+
+@media (max-width: 980px) {
+
+    .field-label {
+        @include font(tablet)
+    }
+
+    .field-input {
+        @include font(tablet)
+    }
+}

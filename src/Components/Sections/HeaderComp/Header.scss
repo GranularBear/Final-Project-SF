@@ -3,13 +3,13 @@
     @if $breakpoint == wideScreen {
         line-height: 17px;
         letter-spacing: 0.01em;
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 
     @if $breakpoint == regularScreen {
         line-height: 17px;
         letter-spacing: 0.01em;
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 }
 
@@ -20,7 +20,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
-    width: calc(100% - padding);
+    // width: calc(100% - padding);
     @include font(wideScreen);
 }
 
@@ -31,6 +31,19 @@
     background-repeat: no-repeat;
     width: 8.8125rem;
     height: 8.8125rem;
+}
+
+.header-middle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nav-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-list {
@@ -64,7 +77,7 @@
     flex-wrap: wrap;
     row-gap: 0.5rem;
     column-gap: 1rem;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center
 }
 
@@ -83,12 +96,38 @@
     border-right: 2px solid #029491;
 }
 
-.log-in {
+.authorize {
     background-color: #7CE3E1;
     padding: 0.5rem;
     border-radius: 5px;
     font-weight: 500;
     color: black;
+}
+
+.user-menu {
+    display: flex;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.username {
+    margin: 0;
+    margin-bottom: 0.2rem;
+}
+
+.sign-out {
+    font-size: 0.75rem;
+    color: gray;
+    text-align: end;
+}
+
+.user-pic {
+    border-radius: 50%;
 }
 
 .burger-menu {
@@ -226,7 +265,8 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 36px;
+    height: 2rem;
+    margin-bottom: 1rem;
 }
 
 .dropdown-menu-logo {
@@ -241,9 +281,24 @@
     margin-top: calc(-2.2rem - 19px);
 }
 
+.dropdown-user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-user-info img {
+    margin-right: 0.625rem;
+}
+
+.dropdown-user-info p {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
 .dropdown-menu .nav-list {
     margin: 0;
-    margin-top: -2.8rem;
     display: flex;
     flex-direction: column;
     margin-bottom: calc(75px - 2rem);
@@ -264,7 +319,7 @@
     border: none;
 }
 
-.dropdown-menu.open .log-in {
+.dropdown-menu.open .authorize {
     opacity: 100%;
     transition: opacity, 0.4s ease;
 
@@ -277,7 +332,7 @@
     margin-bottom: 20px;
 }
 
-.dropdown-menu .log-in {
+.dropdown-menu .authorize {
     padding: 0.7rem 8rem;
 }
 
@@ -333,6 +388,10 @@
     .burger-menu {
         display: flex;
         align-items: center;
+    }
+
+    .user-menu {
+        display: none;
     }
 }
 

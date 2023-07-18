@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../AuthContext";
+
+import FieldInput from "../FieldInputComp/FieldInput";
 
 import './AuthorizationForm.scss';
 
@@ -6,40 +10,67 @@ const AuthorizationForm = () => {
     const [loginValue, setLoginValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
     const [loginValid, setLoginValid] = useState(true);
-    // const [passwordValid, setPasswordValid] = useState(true);
+    const [error, setError] = useState('');
+    const { setIsLoggedIn, getUserInfo } = useContext(AuthContext);
+    const navigate = useNavigate();
     
     const handleLoginChange = (event) => {
         setLoginValue(event.target.value);
         setLoginValid(validateLogin(event.target.value))
     }
 
+    console.log(loginValid)
+
     const handlePasswordChange = (event) => {
         setPasswordValue(event.target.value);
-        // setPasswordValid(validatePassword(event.target.value));
     }
 
     const validateLogin = (login) => {
         if (login.startsWith('+')) {
             const re = /^\+[0-9]{1,3}?[- .]?(\(?[0-9]{3}\)?[- .]?[0-9]{3}[- .]?[0-9]{2}[- .]?[0-9]{2})$/;
-            console.log('+');
             return re.test(login);
         } else {
             const re = /^[a-zA-Z0-9.,@-_]*$/;
-            console.log('-');
             return re.test(login);
         }
     }
 
-    // const validatePassword = (password) => {
-    //     const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    //     return re.test(password);
-    // }
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(loginValue, passwordValue);
+        
+        const response = await fetch('https://gateway.scan-interfax.ru/api/v1/account/login',{
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                "login": loginValue,
+                "password": passwordValue
+            }),
+        });
+
+        if (response.status === 200) {
+            const result = await response.json();
+            localStorage.setItem('accessToken', result.accessToken);
+            localStorage.setItem('expire', result.expire);
+            setError('')
+            setIsLoggedIn(true);
+            getUserInfo(result.accessToken);
+            navigate('/');
+        } else {
+            setError('Неправильный логин или пароль');
+        }
     }
+
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        const expireDate = localStorage.getItem('expire');
+        if (token && expireDate && new Date(expireDate) > new Date()) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const isSubmitDisabled = !loginValue || !loginValid || !passwordValue;
 
@@ -72,16 +103,33 @@ const AuthorizationForm = () => {
                 <button className="authorization-form-button sign-up">Зарегистрироваться</button>
             </div>
             <form className="authorization-input-form" onSubmit={handleSubmit}>
-                <div className="input-wrapper login">
-                    <label htmlFor='login'>Логин или номер телефона:</label>
-                    <input className={loginValid ? '' : 'incorrect-input'} type="text" id="login" name="login" value={loginValue} onChange={handleLoginChange} />
-                    <p className="input-error-message">{!loginValid && 'Введите корректные данные'} </p>
-                </div>
-                <div className="input-wrapper password">
-                    <label htmlFor='password'>Пароль:</label>
-                    <input type="password" id='password' name='password' value={passwordValue} onChange={handlePasswordChange} />
-                    {/* {!passwordValid && <p className="input-error-message">Неправильный пароль</p>} */}
-                </div>
+                <FieldInput
+                    type={'text'}
+                    label={'Логин или номер телефона:'}
+                    htmlFor={'login'}
+                    wrapperClassName={'authorization-input-wrapper login'}
+                    labelClassName={'authorization-input-field-label'}
+                    inputClassName={`authorization-input-field-value ${loginValid ? '' : 'incorrect-input'}`}
+                    id={'login'}
+                    name={'login'}
+                    value={loginValue}
+                    onChange={handleLoginChange}
+                    errorMessage={!loginValid && 'Введите корректные данные'}
+                >
+                </FieldInput>
+                <FieldInput
+                    type={'password'}
+                    label={'Пароль:'}
+                    htmlFor={'password'}
+                    wrapperClassName={'authorization-input-wrapper password'}
+                    labelClassName={'authorization-input-field-label'}
+                    inputClassName={`authorization-input-field-value ${error === '' ? '' : 'incorrect-input'}`}
+                    id={'password'}
+                    name={'passwrpd'}
+                    value={passwordValue}
+                    onChange={handlePasswordChange}
+                    errorMessage={error && `${error}`}
+                />
                 <input type="submit" value='Войти' className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled}></input>
                 <a className="restore-password-link" href="#">Восстановить пароль</a>
             </form>
@@ -98,3 +146,4 @@ const AuthorizationForm = () => {
 }
 
 export default AuthorizationForm;
+
