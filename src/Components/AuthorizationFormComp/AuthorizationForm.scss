@@ -75,13 +75,15 @@
     color: black;
 }
 
-.incorrect-input {
+.authorization-input_incorrect {
     border: 1px solid #FF5959 !important; 
+    box-shadow: 0px 0px 20px 0px rgba(255, 89, 89, 0.20);
 }
 
-.incorrect-input:focus {
+.authorization-input_incorrect:focus {
     outline: none;
     border: 1px solid #FF5959 !important;
+    box-shadow: 0px 0px 20px 0px rgba(255, 89, 89, 0.20);
 }
 
 .authorization-form-submit-button {

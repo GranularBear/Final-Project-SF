@@ -110,7 +110,7 @@ const AuthorizationForm = () => {
                     htmlFor={'authorizationField_userLogin'}
                     wrapperClassName={'authorization-input-wrapper login'}
                     labelClassName={'authorization-input-field-label'}
-                    inputClassName={`authorization-input-field-value ${loginValid ? '' : 'incorrect-input'}`}
+                    inputClassName={`authorization-input-field-value ${loginValid ? '' : 'authorization-input_incorrect'}`}
                     id={'authorizationField_userLogin'}
                     name={'authorizationField_userLogin'}
                     value={loginValue}
@@ -124,7 +124,7 @@ const AuthorizationForm = () => {
                     htmlFor={'authorizationField_userPassword'}
                     wrapperClassName={'authorization-input-wrapper password'}
                     labelClassName={'authorization-input-field-label'}
-                    inputClassName={`authorization-input-field-value ${error === '' ? '' : 'incorrect-input'}`}
+                    inputClassName={`authorization-input-field-value ${error === '' ? '' : 'authorization-input_incorrect'}`}
                     id={'authorizationField_userPassword'}
                     name={'authorizationField_userPassword'}
                     value={passwordValue}

@@ -21,8 +21,28 @@ const ScanField = (props) => {
         scanField_includeNewsSummaryCheckbox: false,
     })
 
+    const [TINValid, setTINValid] = useState(true);
+    const [TINError, setTINError] = useState('');
+
+    const [documentQuantityValid, setDocumentQuantityValid] = useState(true);
+
+    const [datesValid, setDatesValid] = useState(true);
+
+    const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
+
+    useEffect(() => {
+        if (isSubmitAttempted) {
+            if(TINValid) {
+                console.log('Submitted');
+            } else {
+                console.log(`Not Submitted: ${TINError}`)
+            }
+        }
+    }, [TINValid, TINError, isSubmitAttempted]);
+
     const handleTINChange = (event) => {
-        setTINValue(event.target.value);
+        let value = event.target.value.replace(/[_()\-]+/g,'');
+        setTINValue(value);
     }
 
     const handleDocumentQuantityValueChange = (event) => {
@@ -33,15 +53,62 @@ const ScanField = (props) => {
         setTonality(option);
     }
 
-    console.log(tonality)
-
     const handleCheckboxChange = (event) => {
         setCheckboxes({...checkboxes, [event.target.id]: event.target.checked})
     };
 
+    const validateTIN = (TIN) => {
+        let result = false;
+
+        if (!TIN.length) {
+            setTINError('Введите ИНН');
+            return result;
+        } else if (/[^0-9]/.test(TIN)) {
+            setTINError('ИНН может состоять только из цифр');
+            return result;
+        } else if ([10, 12].indexOf(TIN.length) === -1) {
+            setTINError('ИНН может состоять только из 10 или 12 цифр');
+            return result;
+        } else {
+            const checkDigit = (TIN, ratios) => {
+                let d = 0;
+                for (let i in ratios) {
+                    d += ratios[i] * TIN[i];
+                }
+                return parseInt(d % 11 % 10);
+            };
+            switch (TIN.length) {
+                case 10:
+                    const d10 = checkDigit(TIN, [2, 4, 10, 3, 5, 9, 4, 6, 8]);
+                    if (d10 === parseInt(TIN[9])) {
+                        result = true;
+                    }
+                    break;
+                case 12:
+                    const d11 = checkDigit(TIN, [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
+                    const d12 = checkDigit(TIN, [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
+                    if ((d11 === parseInt(TIN[10])) && (d12 === parseInt(TIN[11]))) {
+                        result = true;
+                    }
+                    break;
+                default: 
+                    result = false;
+                    setTINError('Введите корректный ИНН');
+            }
+            if (!result) {
+                setTINError('Неправильное контрольное число');
+            }
+        }
+        return result;
+    }
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Submitted');
+
+        setTINValid(validateTIN(TINValue));
+
+        setIsSubmitAttempted(true);
     }
 
     return (
@@ -54,12 +121,15 @@ const ScanField = (props) => {
                     htmlFor={'scanField_TINInput'}
                     wrapperClassName={'search-input-wrapper'}
                     labelClassName={'search-input-field-label'}
-                    inputClassName={'search-input-field-entry'}
+                    inputClassName={`search-input-field-entry ${!TINValid ? 'scan-field_incorrect-input' : ''} `}
                     id={'scanField_TINInput'}
                     name={'scanField_TINInput'}
                     value={TINValue}
                     onChange={handleTINChange}
                     placeholder={'10 цифр'}
+                    errorMessage={!TINValid ? `${TINError}` : ''}
+                    mask='9999-9999-99-(99)'
+                    maskChar='_'
                 />
                 <FieldInput
                     type={'select'}
@@ -77,6 +147,7 @@ const ScanField = (props) => {
                         {value: 'option3', label: 'Негативная'},
                     ]}
                     onChange={handleTonalityChange}
+                    errorMessage={''}
                 />
                 <FieldInput
                     type={'number'}
@@ -91,6 +162,7 @@ const ScanField = (props) => {
                     value={documentQuantityValue}
                     onChange={handleDocumentQuantityValueChange}
                     placeholder={'от 1 до 1000'}
+                    errorMessage={''}
                 />
                 <FieldInput
                     type={'date'}
@@ -106,6 +178,7 @@ const ScanField = (props) => {
                     endDate={endDate}
                     onChange={setStartDate}
                     onChange_2={setEndDate}
+                    errorMessage={''}
                 />
             </div>
             <div className="scan-checkboxes-wrapper">
