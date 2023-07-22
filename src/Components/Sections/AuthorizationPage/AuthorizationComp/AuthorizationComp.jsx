@@ -10,7 +10,7 @@ const AuthorizationComp = () => {
         <div className="authorization-comp-wrapper">
             <div className="authorization-description-wrapper">
                 <h2 className="authorization-title">
-                    Для оформления подписки<br/>на тариф необходимо<br/>авторизоваться. 
+                    Для оформления подписки<br/>на тариф необходимо<br/>авторизоваться
                 </h2>
                 <div className="characters-icon">
                 </div>

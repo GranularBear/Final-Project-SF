@@ -25,8 +25,10 @@ const ScanField = (props) => {
     const [TINError, setTINError] = useState('');
 
     const [documentQuantityValid, setDocumentQuantityValid] = useState(true);
+    const [documentQuantityError, setDocumentQuantityError] = useState('');
 
     const [datesValid, setDatesValid] = useState(true);
+    const [datesError, setDatesError] = useState('');
 
     const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
 
@@ -102,11 +104,58 @@ const ScanField = (props) => {
         return result;
     }
 
+    const validateDocumentQuantity = (documentQuantity) => {
+        let result = false;
+
+        if (documentQuantity === undefined || documentQuantity.toString().length === 0) {
+            setDocumentQuantityError('Обязательное поле')
+            return result;
+        } else if (documentQuantity < 1 || documentQuantity > 1000) {
+            setDocumentQuantityError('Число вне диапозона')
+            return result;
+        } else {
+            result = true;
+            return result;
+        }
+    }
+
+    const validateDates = (firstDate, lastDate) => {
+        let result = false;
+        let currentDate = new Date();
+
+        currentDate.setHours(0,0,0,0);
+
+        if (!firstDate || !lastDate) {
+            setDatesError('Укажите необходимые даты');
+            return result;
+        } else {
+            firstDate.setHours(0,0,0,0);
+            lastDate.setHours(0,0,0,0);
+
+            if (firstDate > lastDate) {
+                setDatesError('Дата начала не может быть позднее даты конца');
+                return result;
+            } else if (firstDate > currentDate) {
+                setDatesError('Дата начала не может быть позднее текущей даты');
+                return result;
+            } else if (lastDate> currentDate) {
+                setDatesError('Дата конца не может быть позднее текущей даты');
+                return result;
+            } else {
+                result = true;
+                return result;
+            }
+        }
+
+    }
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         setTINValid(validateTIN(TINValue));
+        setDocumentQuantityValid(validateDocumentQuantity(documentQuantityValue));
+        setDatesValid(validateDates(startDate, endDate));
 
         setIsSubmitAttempted(true);
     }
@@ -156,13 +205,13 @@ const ScanField = (props) => {
                     htmlFor={'scanField_documentQuantityInput'}
                     wrapperClassName={'search-input-wrapper'}
                     labelClassName={'search-input-field-label'}
-                    inputClassName={'search-input-field-entry'}
+                    inputClassName={`search-input-field-entry ${!documentQuantityValid ? 'scan-field_incorrect-input' : ''}`}
                     id={'scanField_documentQuantityInput'}
                     name={'scanField_documentQuantityInput'}
                     value={documentQuantityValue}
                     onChange={handleDocumentQuantityValueChange}
                     placeholder={'от 1 до 1000'}
-                    errorMessage={''}
+                    errorMessage={!documentQuantityValid ? `${documentQuantityError}` : ''}
                 />
                 <FieldInput
                     type={'date'}
@@ -171,14 +220,14 @@ const ScanField = (props) => {
                     htmlFor={'scanField_dateRangeInput'}
                     wrapperClassName={'search-input-wrapper'}
                     labelClassName={'search-input-field-label'}
-                    inputClassName={'search-input-field-entry'}
+                    inputClassName={`search-input-field-entry ${!datesValid ? 'scan-field_incorrect-input' : ''}`}
                     id={'scanField_dateRangeInput'}
                     name={'scanField_dateRangeInput'}
                     startDate={startDate}
                     endDate={endDate}
                     onChange={setStartDate}
                     onChange_2={setEndDate}
-                    errorMessage={''}
+                    errorMessage={!datesValid ? `${datesError}` : ''}
                 />
             </div>
             <div className="scan-checkboxes-wrapper">
@@ -275,7 +324,7 @@ const ScanField = (props) => {
                 />
             </div>
         <div className="scan-field-button-wrapper">
-            <Button type={'submit'} backgroundColor='#5970FF' textColor='#fff' text='Поиск' />
+            <Button type={'submit'} backgroundColor='#5970FF' textColor='#fff' text='Поиск' className={'scanField_submit-button'} />
             <p className="scan-field-additional-info">* Обязательные к заполнению поля</p>
         </div>
         </form>

@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import CustomArrow from '../../Icons/gray-arrow_pointed-down-icon.jpg'
 
 import './FieldInput.scss';
-import { pl } from "date-fns/locale";
 
 const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName, inputClassName, placeholder, options, htmlFor, errorMessage, onChange, onChange_2, startDate, endDate,...otherProps }) => {
     const startDateInputRef = useRef(null);
@@ -18,6 +17,7 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
     const [isWideScreen, setIsWideScreen] = useState(screenWidth > 1920);
     const [isRegularScreen, setIsRegularScreen] = useState(screenWidth > 980 && screenWidth < 1920);
     const [isTablet, setIsTablet] = useState(screenWidth < 980);
+    const [isMobile, setIsMobile] = useState(screenWidth < 768)
 
     useEffect(() => {
         const handleResize = () => {
@@ -25,6 +25,7 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
             const newIsWideScreen = newScreenWidth > 1920;
             const newIsRegularScreen = newScreenWidth > 980 && newScreenWidth < 1920;
             const newIsTablet = newScreenWidth < 980;
+            const newIsMobile = newScreenWidth < 768;
 
 
             if (newIsWideScreen !== isWideScreen) {
@@ -36,6 +37,9 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
             } else if (newIsTablet !== isTablet) {
                 setScreenWidth(newScreenWidth);
                 setIsTablet(newIsTablet);
+            } else if (newIsMobile !== isMobile) {
+                setScreenWidth(newScreenWidth);
+                setIsMobile(newIsMobile);
             }
         };
 
@@ -45,7 +49,7 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
             window.removeEventListener('resize', handleResize);
         }
 
-    }, [isWideScreen, isRegularScreen, isTablet]);
+    }, [isWideScreen, isRegularScreen, isTablet, isMobile]);
 
     const DropdownIndicator = (props) => {
         return (
@@ -75,13 +79,20 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
 
         valueContainer: (provided, state) => ({
             ...provided,
-            padding: '0'
+            padding: '0',
+            textAlign: isMobile ? 'center' : 'left',
+            paddingLeft: isMobile ? '36px' : '0px',
         }),
 
         indicatorsContainer: (provided, state) => ({
             ...provided,
             padding: '0',
             cursor: 'pointer'
+        }),
+
+        placeholder: (provided, state) => ({
+            ...provided,
+            textAlign: isMobile ? 'center' : 'left',
         })
     }
 
@@ -116,8 +127,8 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                 ?
                     <div className="select-input-container">
                         <Select
+                            isSearchable={false}
                             className={` ${inputClassName}`}
-                            // required={isRequired}
                             options={options}
                             styles={customSelectStyles}
                             components={{ DropdownIndicator, IndicatorSeparator: () => null }}

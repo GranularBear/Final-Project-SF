@@ -31,7 +31,7 @@ const MainDescription = () => {
     return (
         <div className="main-description-container">
             <div className="description-wrapper">
-                <h1 className="main-title">Сервис по поиску<br/>публикаций<br/>о компании<br/>по его ИНН</h1>
+                <h1 className="main-title">Сервис по поиску<br/>публикаций<br/>о компании<br/>по ее ИНН</h1>
                 {isAboveBreakpoint ? 
                 <p className="main-description">Комплексный анализ публикаций, получение данных<br/> в формате PDF на электронную почту.</p>
                 : <p className="main-description">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>

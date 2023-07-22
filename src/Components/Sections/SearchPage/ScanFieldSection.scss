@@ -1,0 +1,241 @@
+.scan-field-section_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.4fr 1fr;
+    column-gap: 2rem;
+    grid-template-areas:
+    'description document-icons'
+    'scan-field search-rocket-img';
+    margin-top: 3rem;
+}
+
+.scan-field-section_description-wrapper {
+    margin-bottom: 2.94rem;
+    grid-area: description;
+    position: relative;
+}
+
+.scan-field-section_sub-title {
+    font-family: Ferry;
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.075rem;
+    text-align: left;
+    margin: 0;
+    margin-bottom: 1.56rem;
+    width: 65%;
+    line-height: normal;
+}
+
+.scan-field-section_description {
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.025rem;
+    margin: 0;
+}
+
+.scan-field_description-wrapper_mobile-icon {
+    display: none;
+}
+
+.scan-field-section_scan-field-wrapper {
+    grid-area: scan-field;
+}
+
+.scan-field-section_document-icons-wrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.scan-field-section_document-icon {
+    background-image: url(../../../Icons/document-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height: 6.94488rem;
+    align-self: flex-end;
+    justify-self: end;
+}
+
+.scan-field-section_folders-icon {
+    background-image: url(../../../Icons/folders-icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height: 4.27463rem;
+    align-self: flex-end;
+    justify-self: end;
+}
+
+.scan-field-section_search-rocket-img-wrapper {
+    grid-area: search-rocket-img;
+    background-image: url(../../../Icons/search-rocket-img.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 100%;
+    height: 29.38838rem;
+    align-self: center;
+    justify-self: center;
+
+}
+
+
+@media (max-width: 1720px) {
+    .scan-field-section_container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 1500px) {
+
+    .scan-field-section_scan-field-wrapper> .scan-field-container > .obligatory-scan-inputs-wrapper > .date-wrapper > .date-range-picker {
+        flex-direction: column;
+    }
+
+    .scan-field-section_scan-field-wrapper> .scan-field-container > .obligatory-scan-inputs-wrapper > .search-input-wrapper {
+        width: auto;
+    }
+
+    .scan-field-section_scan-field-wrapper> .scan-field-container {
+        column-gap: 2rem;
+    }
+
+    .scan-field-section_sub-title {
+        width: auto;
+    }
+}
+
+@media (max-width: 1250px) {
+
+    .scan-field-section_description-wrapper {
+        width: 72%;
+    }
+    
+    .scan-field-section_container {
+        grid-template-columns: none;
+        grid-template-rows: 0.3fr 1fr 0.1fr 0.5fr;
+        gap: 2.94rem;
+        grid-template-areas: 
+            'description'
+            'scan-field'
+            'document-icons'
+            'search-rocket-img'
+        ;
+    }
+
+    .scan-field-section_description-wrapper {
+        margin: 0;
+    }
+
+    .scan-field-section_search-rocket-img-wrapper {
+        margin-top: -2.94rem;
+    }
+}
+
+@media (max-width: 980px) {
+    
+    .scan-field-section_description-wrapper {
+        width: 95%;
+    }
+}
+
+@media (max-width: 800px) {
+    
+    .scan-field-section_scan-field-wrapper > .scan-field-container {
+        column-gap: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .scan-field-section_description-wrapper {
+        width: 80%;
+    }
+    
+    .scan-field-section_sub-title {
+        font-size: 1.75rem;
+    }
+
+    .scan-field-section_description {
+        font-size: 1.125rem;
+    }
+
+    .scan-field-section_scan-field-wrapper > .scan-field-container {
+        grid-template-columns: none;
+        grid-template-rows: 1fr 0.1fr;
+        grid-template-areas: 
+            'inputs'
+            'button'
+        ;
+
+        .scan-field-button-wrapper {
+            justify-self: center;
+            margin-top: 2rem;
+
+            .scan-field-additional-info {
+                text-align: center;
+            }
+        }
+
+        .scan-checkboxes-wrapper {
+            display: none;
+        }
+
+        .date-picker-container,
+        .react-datepicker-wrapper,
+        .react-datepicker__input-container,
+        .react-datepicker__input-container > input {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .dropdown-arrow {
+            right: 4%;
+        }
+
+        .field-input,
+        .field-input::placeholder {
+            text-align: center;
+        }
+    }
+
+    .scan-field-section_document-icons-wrapper {
+        display: none;
+    }
+
+    .scan-field_description-wrapper_mobile-icon {
+        display: block;
+        position: absolute;
+        height: 4.445rem;
+        top: 37%;
+        left: 105%;
+        width: 4rem;
+    }
+}
+
+@media (max-width: 375px) {
+
+    .scan-field-section_container {
+        margin: 0;
+    }
+
+    .scan-field-section_scan-field-wrapper > .scan-field-container {
+        padding: 0.875rem;
+        margin: calc(-0.87rem);
+    }
+
+    .scan-field_description-wrapper_mobile-icon {
+        left: 95%;
+    }
+
+
+    .scan-field-section_search-rocket-img-wrapper {
+        margin-top: -7rem;
+    }
+}
+
