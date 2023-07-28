@@ -1,0 +1,102 @@
+.histogram-carousel-container {
+    display: grid;
+    grid-template-columns: 0.01fr 1fr 0.01fr;
+    align-items: center;
+    white-space: nowrap;
+    box-sizing: border-box;
+
+    &.no-data-carousel {
+        grid-template-columns: none;
+
+        .histogram-carousel-wrapper {
+            display: grid;
+            grid-template-columns: 0.01fr 1fr;
+        }
+
+        .histogram-carousel_no-data-message {
+            align-self: center;
+            justify-self: center;
+            font-size: 1.25rem;
+        }
+    }
+}
+
+.histogram-carousel_arrow {
+    border: solid rgba(0, 0, 0, 0.2);
+    border-width: 0 5px 5px 0;
+    display: inline-block;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+
+    &.left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        margin-right: 10px;
+    }
+
+    &.right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        margin-left: 10px;
+    }
+
+    &.active {
+    border: solid rgba(0, 0, 0, 0.7);
+    border-width: 0 5px 5px 0;
+    }
+}
+
+.histogram-carousel-wrapper {
+    margin: 0;
+    display: flex;
+    border: 2px solid #029491;
+    border-radius: 10px;
+
+    .initial-cell {
+        background-color: #029491;
+        color: #fff;
+        border-radius: 6px 0 0 6px;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+
+    .data-cell {
+        text-align: center;
+        padding: 0 18px 0 18px;
+        // flex: 1;
+        margin: 18px 0 18px 0;
+        border-right: 1px solid rgba($color: #000000, $alpha: 0.4);
+    }
+}
+
+.histogram-carousel_cell {
+    padding: 18px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    // display: flex;
+    // flex: 1;
+    flex-direction: column;
+    row-gap: 26px;
+}
+
+.histogram-carousel_cell-info-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    :last-child {
+        .data-cell {
+            margin-right: 0.25rem;
+        }
+    }
+}
+
+.histogram-carousel_cell-info-entry {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.histogram-carousel_cell-info {
+    margin: 0;
+}

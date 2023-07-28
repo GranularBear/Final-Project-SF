@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useAuth } from "../../AuthContext";
+
 
 import FieldInput from "../FieldInputComp/FieldInput";
 import Button from '../ButtonComp/Button';
@@ -6,9 +8,11 @@ import Button from '../ButtonComp/Button';
 import './ScanField.scss';
 
 const ScanField = (props) => {
-    const [TINValue, setTINValue] = useState('');
-    const [documentQuantityValue, setDocumentQuantityValue] = useState();
-    const [tonality, setTonality] = useState('');
+    const { setLoadingHistogram, setHistogramData, isScanAttempted, setIsScanAttempted, setDocumentIDs, loadDocuments, visibleDocuments }  = useAuth();
+
+    const [TINValue, setTINValue] = useState(null);
+    const [documentQuantityValue, setDocumentQuantityValue] = useState(null);
+    const [tonality, setTonality] = useState("any");
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [checkboxes, setCheckboxes] = useState({
@@ -30,17 +34,15 @@ const ScanField = (props) => {
     const [datesValid, setDatesValid] = useState(true);
     const [datesError, setDatesError] = useState('');
 
-    const [isSubmitAttempted, setIsSubmitAttempted] = useState(false);
-
     useEffect(() => {
-        if (isSubmitAttempted) {
+        if (isScanAttempted) {
             if(TINValid) {
                 console.log('Submitted');
             } else {
                 console.log(`Not Submitted: ${TINError}`)
             }
         }
-    }, [TINValid, TINError, isSubmitAttempted]);
+    }, [TINValid, TINError, isScanAttempted]);
 
     const handleTINChange = (event) => {
         let value = event.target.value.replace(/[_()\-]+/g,'');
@@ -52,7 +54,14 @@ const ScanField = (props) => {
     }
 
     const handleTonalityChange = (option) => {
-        setTonality(option);
+
+        if (option.label === 'Любая') {
+            setTonality("any");
+        } else if (option.label === 'Позитивная') {
+            setTonality("positive")
+        } else if (option.label === 'Негативная') {
+            setTonality("negative")
+        }
     }
 
     const handleCheckboxChange = (event) => {
@@ -62,7 +71,7 @@ const ScanField = (props) => {
     const validateTIN = (TIN) => {
         let result = false;
 
-        if (!TIN.length) {
+        if (TINValue === null || !TINValue.length) {
             setTINError('Введите ИНН');
             return result;
         } else if (/[^0-9]/.test(TIN)) {
@@ -107,7 +116,7 @@ const ScanField = (props) => {
     const validateDocumentQuantity = (documentQuantity) => {
         let result = false;
 
-        if (documentQuantity === undefined || documentQuantity.toString().length === 0) {
+        if (documentQuantity === undefined || documentQuantity === null || documentQuantity.toString().length === 0) {
             setDocumentQuantityError('Обязательное поле')
             return result;
         } else if (documentQuantity < 1 || documentQuantity > 1000) {
@@ -149,15 +158,105 @@ const ScanField = (props) => {
 
     }
 
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         setTINValid(validateTIN(TINValue));
         setDocumentQuantityValid(validateDocumentQuantity(documentQuantityValue));
         setDatesValid(validateDates(startDate, endDate));
 
-        setIsSubmitAttempted(true);
+        if (TINValid && TINValue !== null && documentQuantityValid && documentQuantityValue !== null && datesValid && startDate !== null && endDate !== null) {
+            setLoadingHistogram(true);
+            setIsScanAttempted(true);
+
+            const payload = {
+                "issueDateInterval": {
+                    "startDate": startDate.toISOString(),
+                    "endDate": endDate.toISOString()
+                },
+                "searchContext": {
+                    "targetSearchEntitiesContext": {
+                        targetSearchEntities: [
+                            {
+                                "type": "company",
+                                "sparkId": null,
+                                "entityId": null,
+                                "inn": TINValue,
+                                "maxFullness": checkboxes['scanField_maxCompletenessCheckbox'],
+                                "inBusinessNews": checkboxes['scanField_businessContextCheckbox']
+                            }
+                        ],
+                        "onlyMainRole": checkboxes['scanField_mainRoleCheckbox'],
+                        "tonality": tonality,
+                        "onlyWithRiskFactors": checkboxes['scanField_RiskFactorsOnlyCheckbox'],
+                        "riskFactors": {
+                            "and": [],
+                            "or": [],
+                            "not": []
+                        },
+                        "themes": {
+                            "and": [],
+                            "or": [],
+                            "not": []
+                        }
+                    },
+                    "themesFilter": {
+                        "and": [],
+                        "or": [],
+                        "not": []
+                    }
+                },
+                "searchArea": {
+                    "includedSources": [],
+                    "excludedSources": [],
+                    "includedSourceGroups": [],
+                    "excludedSourceGroups": []
+                },
+                "similarMode": "duplicates",
+                "limit": documentQuantityValue,
+                "sortType": "issueDate",
+                "sortDirectionType": "desc",
+                "intervalType": "month",
+                "histogramTypes": [
+                    "totalDocuments",
+                    "riskFactors"
+                ],
+                "attributeFilters": {
+                    "excludeTechNews": checkboxes['scanField_includeTechMarketNewsCheckbox'],
+                    "excludeAnnouncements": checkboxes['scanField_includePreviewAndCalendarsCheckbox'],
+                    "excludeDigets": checkboxes['scanField_includeNewsSummaryCheckbox']
+                }
+            };
+
+            const histogramResponse = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const histogramData = await histogramResponse.json();
+            setHistogramData(histogramData);
+
+            const documentIDsResponse = await fetch ('https://gateway.scan-interfax.ru/api/v1/objectsearch/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const documentIDs = await documentIDsResponse.json();
+            setDocumentIDs(documentIDs.items);
+            // loadDocuments();
+
+            // console.log(visibleDocuments)
+
+            setLoadingHistogram(false);
+        }
     }
 
     return (

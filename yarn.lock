@@ -4787,6 +4787,13 @@
   "resolved" "https://registry.npmjs.org/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz"
   "version" "2.0.6"
 
+"fast-xml-parser@^4.2.6":
+  "integrity" "sha512-Xo1qV++h/Y3Ng8dphjahnYe+rGHaaNdsYOBWL9Y9GCPKpNKilJtilvWkLcI9f9X2DoKTLsZsGYAls5+JL5jfLA=="
+  "resolved" "https://registry.npmjs.org/fast-xml-parser/-/fast-xml-parser-4.2.6.tgz"
+  "version" "4.2.6"
+  dependencies:
+    "strnum" "^1.0.5"
+
 "fastq@^1.6.0":
   "integrity" "sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw=="
   "resolved" "https://registry.npmjs.org/fastq/-/fastq-1.15.0.tgz"
@@ -8310,6 +8317,11 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
+"react-xml-parser@^1.1.8":
+  "integrity" "sha512-yX9k9LNCRzzNnFWoyo9cWEjtor6n6VD0Uh7z1ww5rIP6h5vdhJKEmowsm9RumEJMRdr7akcT4mMBScpsz573qQ=="
+  "resolved" "https://registry.npmjs.org/react-xml-parser/-/react-xml-parser-1.1.8.tgz"
+  "version" "1.1.8"
+
 "react@^15.5.x || ^16.x || ^17.x || ^18.x", "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.9.0 || ^17 || ^18", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=0.14.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
@@ -9142,6 +9154,11 @@
   "integrity" "sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig=="
   "resolved" "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-3.1.1.tgz"
   "version" "3.1.1"
+
+"strnum@^1.0.5":
+  "integrity" "sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA=="
+  "resolved" "https://registry.npmjs.org/strnum/-/strnum-1.0.5.tgz"
+  "version" "1.0.5"
 
 "style-loader@^3.3.1":
   "integrity" "sha512-53BiGLXAcll9maCYtZi2RCQZKa8NQQai5C4horqKyRmHj9H7QmcUyucrH+4KW/gBQbXM2AsB0axoEcFZPlfPcw=="

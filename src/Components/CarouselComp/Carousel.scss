@@ -1,21 +1,22 @@
 .carousel-arrow {
-    border: solid lightgrey;
+    border: solid rgba(0, 0, 0, 0.2);
     border-width: 0 5px 5px 0;
     display: inline-block;
-    padding: 10px;
     cursor: pointer;
-}
+    width: 20px;
+    height: 20px;
 
-.carousel-arrow.left {
-    transform: rotate(135deg);
-    -webkit-transform: rotate(135deg);
-    margin-right: 10px;
-}
+    &.left {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        margin-right: 10px;
+    }
 
-.carousel-arrow.right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    margin-left: 10px;
+    &.right {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        margin-left: 10px;
+    }
 }
 
 .carousel-wrapper {

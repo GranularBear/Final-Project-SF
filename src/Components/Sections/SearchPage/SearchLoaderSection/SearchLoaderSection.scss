@@ -1,0 +1,34 @@
+.search-loader-section_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 16rem 0 16rem 0;
+}
+
+.search-loader-section_left-part {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.search-loader-section_sub-title {
+    font-family: Ferry;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 48px;
+    letter-spacing: 0.04em;
+    text-align: left;
+}
+
+.search-loader-section_information {
+    font-size: 1.25rem;
+}
+
+.search-loader-section_image-container {
+    background-image: url(../../../../Icons/search-loader_img.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 23rem;
+}

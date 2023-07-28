@@ -6,7 +6,7 @@
     grid-template-areas:
     'description document-icons'
     'scan-field search-rocket-img';
-    margin-top: 3rem;
+    margin: 3rem 0 6.25rem 0;
 }
 
 .scan-field-section_description-wrapper {
@@ -50,7 +50,7 @@
 }
 
 .scan-field-section_document-icon {
-    background-image: url(../../../Icons/document-icon.svg);
+    background-image: url(../../../../Icons/document-icon.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -61,7 +61,7 @@
 }
 
 .scan-field-section_folders-icon {
-    background-image: url(../../../Icons/folders-icon.svg);
+    background-image: url(../../../../Icons/folders-icon.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -73,7 +73,7 @@
 
 .scan-field-section_search-rocket-img-wrapper {
     grid-area: search-rocket-img;
-    background-image: url(../../../Icons/search-rocket-img.svg);
+    background-image: url(../../../../Icons/search-rocket-img.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
