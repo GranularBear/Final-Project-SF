@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: 1fr 0.7fr;
     align-items: center;
+    margin-top: 2rem;
 }
 
 .authorization-title {
@@ -76,6 +77,7 @@
         grid-template-rows: 0.6fr 1fr 0.6fr;
         grid-auto-flow: dense;
         justify-items: center;
+        margin: 0;
     }
 
     .characters-icon {

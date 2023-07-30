@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Header from '../../Components/Sections/HeaderComp/Header';
-import Footer from '../../Components/Sections/FooterComp/Footer';
-import AuthorizationComp from '../../Components/Sections/AuthorizationPage/AuthorizationComp/AuthorizationComp';
+import Header from '../../../Components/Sections/HeaderComp/Header';
+import Footer from '../../../Components/Sections/FooterComp/Footer';
+import AuthorizationComp from '../../../Components/Sections/AuthorizationPage/AuthorizationComp/AuthorizationComp';
 
 import classes from './AuthorizationPage.module.scss';
 

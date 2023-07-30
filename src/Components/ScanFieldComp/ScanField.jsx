@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../AuthContext";
 
 
@@ -8,7 +9,8 @@ import Button from '../ButtonComp/Button';
 import './ScanField.scss';
 
 const ScanField = (props) => {
-    const { setLoadingHistogram, setHistogramData, isScanAttempted, setIsScanAttempted, setDocumentIDs, loadDocuments, visibleDocuments }  = useAuth();
+    const navigate = useNavigate();
+    const { setLoadingHistogram, setHistogramData, isScanAttempted, setIsScanAttempted, setDocumentIDs, setIsLoggedIn }  = useAuth();
 
     const [TINValue, setTINValue] = useState(null);
     const [documentQuantityValue, setDocumentQuantityValue] = useState(null);
@@ -237,25 +239,29 @@ const ScanField = (props) => {
                 body: JSON.stringify(payload)
             });
 
-            const histogramData = await histogramResponse.json();
-            setHistogramData(histogramData);
-
-            const documentIDsResponse = await fetch ('https://gateway.scan-interfax.ru/api/v1/objectsearch/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                body: JSON.stringify(payload)
-            });
-
-            const documentIDs = await documentIDsResponse.json();
-            setDocumentIDs(documentIDs.items);
-            // loadDocuments();
-
-            // console.log(visibleDocuments)
-
-            setLoadingHistogram(false);
+            if (histogramResponse.status === 200) {
+                const histogramData = await histogramResponse.json();
+                setHistogramData(histogramData);
+    
+                const documentIDsResponse = await fetch ('https://gateway.scan-interfax.ru/api/v1/objectsearch/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+    
+                const documentIDs = await documentIDsResponse.json();
+                setDocumentIDs(documentIDs.items);
+                setLoadingHistogram(false);
+            } else if (histogramResponse.status === 401) {
+                navigate('/authorization');
+                setIsLoggedIn(false);
+                alert('Время сессии истекло. Пожалуйста, пройдите авторизацию')
+            } else {
+                console.error('Failed to fetch the data')
+            }
         }
     }
 

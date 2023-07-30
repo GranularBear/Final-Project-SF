@@ -419,3 +419,12 @@
         left: -1.6rem;
     }
 }
+
+@media (max-width: 320px) {
+
+    .header-logo,
+    .dropdown-menu-logo {
+        width: 6rem;
+        height: 6rem;
+    }
+}

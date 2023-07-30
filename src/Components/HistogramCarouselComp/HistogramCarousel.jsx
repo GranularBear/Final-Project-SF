@@ -6,7 +6,8 @@ const CarouselContent = ({data}) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isArrowActive, setIsArrowActive] = useState({left: false, right: false});
     const [visibleItems, setVisibleItems] = useState(10);
-    const [itemWidth, setItemWidth] = useState(0);
+    const [itemWidth, setItemWidth] = useState(145);
+    const [isSingleItemVisible, setIsSingleItemVisible] = useState(false);
 
     const carouselContainerRef = useRef(null);
 
@@ -25,19 +26,21 @@ const CarouselContent = ({data}) => {
     const displayedData = sortedData.slice(currentIndex, (currentIndex + visibleItems) - 1);
 
     const moveNext = () => {
-        if (currentIndex + visibleItems < sortedData.length) {
-            setCurrentIndex(prevIndex => (prevIndex + visibleItems) % sortedData.length);
+        const nextIndex = currentIndex + visibleItems - 1;
+        if (nextIndex < sortedData.length) {
+            setCurrentIndex(nextIndex);
         }
     }
 
     const movePrev = () => {
         if(currentIndex > 0) {
-            setCurrentIndex(prevIndex => (prevIndex - visibleItems + sortedData.length) % sortedData.length);
+            setCurrentIndex(prevIndex => (prevIndex - visibleItems + 1 + sortedData.length) % sortedData.length);
         }
     }
 
+
     useEffect(() => {
-        if (currentIndex + visibleItems < sortedData.length) {
+        if (currentIndex + visibleItems - 1 < sortedData.length) {
             setIsArrowActive(prevState => ({...prevState, right: true}))
         } else {
             setIsArrowActive(prevState => ({...prevState, right: false}))
@@ -50,12 +53,13 @@ const CarouselContent = ({data}) => {
         }
     }, [currentIndex, sortedData.length, visibleItems]);
 
+
     useEffect(() => {
         const updateItemWidth = () => {
             if (carouselContainerRef.current) {
                 const containerWidth = carouselContainerRef.current.offsetWidth;
                 if (itemWidth > 0) {
-                  setVisibleItems(Math.floor(containerWidth/ itemWidth));
+                  setVisibleItems(Math.floor(containerWidth / itemWidth));
                 }
             }
         }
@@ -75,6 +79,10 @@ const CarouselContent = ({data}) => {
         };
     }, [itemWidth]);
 
+        if (visibleItems < 2) {
+            setVisibleItems(2)
+        }
+
     return (
         <div className="histogram-carousel-container"  ref={carouselContainerRef}>
             <div className={`histogram-carousel_arrow left ${isArrowActive.left ? 'active' : ''}`} onClick={movePrev}/>
@@ -87,11 +95,12 @@ const CarouselContent = ({data}) => {
                 <div className="histogram-carousel_cell-info-container">
                         {displayedData.map((item, index) => (
                             <div key={`histogram_entry_${index}`} className="histogram-carousel_cell-info-entry"
-                            ref={el => {
-                                if (el && index === 0) {
-                                    setItemWidth(el.offsetWidth);
-                                }
-                            }}>
+                            // ref={el => {
+                            //     if (el && index === 0) {
+                            //         setItemWidth(el.offsetWidth);
+                            //     }
+                            // }}
+                            >
                                 <div className="histogram-carousel_cell data-cell">
                                     <p className="histogram-carousel_cell-info">{new Date(item.date).toLocaleDateString()}</p>
                                     <p className="histogram-carousel_cell-info">{item.totalDocuments}</p>

@@ -96,3 +96,10 @@
         transform: translateX(25%);
     }
 }
+
+@media (max-width: 320px) {
+    
+    .user-statistics-menu {
+        right: 30%;
+    }
+}

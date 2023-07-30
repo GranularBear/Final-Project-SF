@@ -8,11 +8,6 @@
     &.no-data-carousel {
         grid-template-columns: none;
 
-        .histogram-carousel-wrapper {
-            display: grid;
-            grid-template-columns: 0.01fr 1fr;
-        }
-
         .histogram-carousel_no-data-message {
             align-self: center;
             justify-self: center;
@@ -81,7 +76,7 @@
 }
 
 .histogram-carousel_cell-info-container {
-    width: 100%;
+    // width: 100%;
     display: flex;
     align-items: center;
 
@@ -99,4 +94,45 @@
 
 .histogram-carousel_cell-info {
     margin: 0;
+}
+
+
+@media (max-width: 425px) {
+
+    .histogram-carousel-wrapper {
+        display: block;
+
+        .histogram-carousel_cell{
+            grid-template-rows: none;
+            grid-template-columns: repeat(3, 1fr);
+            text-align: center;
+            border: none;
+        }
+
+        .initial-cell {
+            font-size: 1.125rem;
+            border-radius: 6px 6px 0 0;
+        }
+
+        .data-cell {
+            font-size: 1rem;
+        }
+
+        .histogram-carousel_cell-info-container {
+            width: 100%;
+
+            .histogram-carousel_cell-info-entry {
+                width: inherit;
+            }
+        }
+    }
+
+    .histogram-carousel_arrow {
+        width: 10px;
+        height: 10px;
+    }
+
+
+
+
 }

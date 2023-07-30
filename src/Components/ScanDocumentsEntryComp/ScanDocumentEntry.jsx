@@ -5,7 +5,7 @@ import Button from "../ButtonComp/Button";
 
 import './ScanDocumentsEntry.scss';
 
-const ScanDocumentsEntry = ({newsContent}) => {
+const ScanDocumentsEntry = ({newsContent, key}) => {
     const [docText, setDocText] = useState('');
     const [imgURL, setImgURL] = useState(null);
     const { issueDate, url, title, attributes, content, source } = newsContent;
@@ -49,8 +49,6 @@ const ScanDocumentsEntry = ({newsContent}) => {
             textContent = removeAllTags(noExtraSpacesContent).slice(0, 1000) + '...';
         }
 
-        console.log(removeAllTags(decodedContent))
-
         setDocText(textContent);
         setImgURL(imgUrl);
     }
@@ -65,7 +63,7 @@ const ScanDocumentsEntry = ({newsContent}) => {
     }
 
     return (
-        <div className="document-entry_container">
+        <div key={key} className="document-entry_container">
             <div className="document-entry_header">
                 <p className="document-entry_date">
                     {new Date(issueDate).toLocaleDateString()}

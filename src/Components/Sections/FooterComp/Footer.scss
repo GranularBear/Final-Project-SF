@@ -59,3 +59,11 @@
         font-size: 8px;
     }
 }
+
+@media (max-width: 320px) {
+    
+    .footer-logo {
+        height: 6rem;
+        width: 6rem;
+    }
+}

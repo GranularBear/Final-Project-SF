@@ -358,10 +358,6 @@
         grid-template-rows: 2.25rem 2.75rem;
     }
 
-    .price {
-        font-size: 1.875rem;
-    }
-
     .card-description {
         @include regular-font(mobile);
     }
