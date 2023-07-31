@@ -1,0 +1,49 @@
+.search-summary-section_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 7rem;
+
+   .histogram-carousel_container {
+    margin-bottom: 6.7rem;
+   }
+}
+
+.search-summary-section_container .search-summary-section_sub-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    letter-spacing: 0.02em;
+    text-align: left;
+}
+
+.search-summary-section_findings-summary {
+    margin: 17px 0 27px 0;
+}
+
+.search-summary-section_document-list {
+    margin-top: 3.6rem;
+    display: grid;
+    grid-template-columns: (repeat(2, 1fr));
+    column-gap: 2.4rem;
+    row-gap: 3.4rem;
+}
+
+.search-summary-section_loading-info {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.search-summary-section_button {
+    justify-self: center;
+    align-self: center;
+    margin-top: 4rem;
+    background-color: #5970FF;
+    color: #fff;
+}
+
+
+@media (max-width: 860px) {
+    
+    .search-summary-section_document-list {
+        grid-template-columns: none;
+    }
+}

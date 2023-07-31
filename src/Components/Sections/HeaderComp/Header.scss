@@ -3,13 +3,13 @@
     @if $breakpoint == wideScreen {
         line-height: 17px;
         letter-spacing: 0.01em;
-        font-size: 18px;
+        font-size: 1.125rem;
     }
 
     @if $breakpoint == regularScreen {
         line-height: 17px;
         letter-spacing: 0.01em;
-        font-size: 14px;
+        font-size: 0.875rem;
     }
 }
 
@@ -20,17 +20,30 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 3rem;
-    width: calc(100% - padding);
+    // width: calc(100% - padding);
     @include font(wideScreen);
 }
 
-.header-logo {
-    background-image: url(../../../Icons/header-logo.svg);
+.header_logo {
+    background-image: url(../../../Icons/Header/header-logo.svg);
     background-size: contain;
     background-position: left;
     background-repeat: no-repeat;
     width: 8.8125rem;
     height: 8.8125rem;
+}
+
+.header-middle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.nav-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-list {
@@ -64,31 +77,59 @@
     flex-wrap: wrap;
     row-gap: 0.5rem;
     column-gap: 1rem;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center
 }
 
-.btn {
+.header_button {
     @include font(wideScreen);
-    cursor: pointer;
-    background: none;
-    border: none;
-    outline: none;
-    text-decoration: none;
+
 }
 
-.sign-up {
+.header_signUp {
+    padding: 0;
     padding-right: 1rem;
+    align-self: center;
+    background-color: transparent;
+    border-radius: 0;
     color: gray;
+    font-weight: 400;
     border-right: 2px solid #029491;
 }
 
-.log-in {
+.header_authorize {
     background-color: #7CE3E1;
     padding: 0.5rem;
-    border-radius: 5px;
-    font-weight: 500;
     color: black;
+}
+
+.header_signOut {
+    font-size: 0.75rem;
+    color: gray;
+    text-align: end;
+    padding: 0;
+    background-color: transparent;
+    font-weight: 400;
+}
+
+.user-menu {
+    display: flex;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.username {
+    margin: 0;
+    margin-bottom: 0.2rem;
+}
+
+.user-pic {
+    border-radius: 50%;
 }
 
 .burger-menu {
@@ -226,13 +267,14 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-bottom: 36px;
+    height: 2rem;
+    margin-bottom: 1rem;
 }
 
 .dropdown-menu-logo {
     visibility: hidden;
     position: relative;
-    background-image: url(../../../Icons/header-logo-white.svg);
+    background-image: url(../../../Icons/Header/header-logo-white.svg);
     background-size: contain;
     background-repeat: no-repeat;
     height: 8.8125rem;
@@ -241,9 +283,24 @@
     margin-top: calc(-2.2rem - 19px);
 }
 
+.dropdown-user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dropdown-user-info img {
+    margin-right: 0.625rem;
+}
+
+.dropdown-user-info p {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
 .dropdown-menu .nav-list {
     margin: 0;
-    margin-top: -2.8rem;
     display: flex;
     flex-direction: column;
     margin-bottom: calc(75px - 2rem);
@@ -253,31 +310,31 @@
     margin-bottom: 25px;
 }
 
-.dropdown-menu .btn {
+.dropdown-menu .header_button {
     opacity: 0;
     transition: opacity, 0.4s ease;
 }
 
-.dropdown-menu.open .sign-up {
+.dropdown-menu.open .header_signUp {
     opacity: 50%;
     transition: opacity, 0.4s ease;
     border: none;
 }
 
-.dropdown-menu.open .log-in {
+.dropdown-menu.open .header_authorize {
     opacity: 100%;
     transition: opacity, 0.4s ease;
 
 }
 
-.dropdown-menu .sign-up {
+.dropdown-menu .header_signUp {
     font-size: 16px;
     padding: 0;
     color: #FFF;
     margin-bottom: 20px;
 }
 
-.dropdown-menu .log-in {
+.dropdown-menu .header_authorize {
     padding: 0.7rem 8rem;
 }
 
@@ -315,7 +372,7 @@
         @include font(regularScreen);
     }
 
-    .btn {
+    .header_button {
         @include font(regularScreen);
     }
 }
@@ -333,6 +390,10 @@
     .burger-menu {
         display: flex;
         align-items: center;
+    }
+
+    .user-menu {
+        display: none;
     }
 }
 
@@ -356,5 +417,14 @@
     .dropdown-menu-logo {
         visibility: visible;
         left: -1.6rem;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .header_logo,
+    .dropdown-menu-logo {
+        width: 6rem;
+        height: 6rem;
     }
 }

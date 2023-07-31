@@ -10,7 +10,7 @@
 }
 
 .footer-logo {
-    background-image: url(../../../Icons/footer-logo.svg);
+    background-image: url(../../../Icons/Footer/footer-logo.svg);
     background-size: contain;
     background-repeat: no-repeat;
     width: 8.8125rem;
@@ -57,5 +57,13 @@
 
     .copyright-info {
         font-size: 8px;
+    }
+}
+
+@media (max-width: 320px) {
+    
+    .footer-logo {
+        height: 6rem;
+        width: 6rem;
     }
 }

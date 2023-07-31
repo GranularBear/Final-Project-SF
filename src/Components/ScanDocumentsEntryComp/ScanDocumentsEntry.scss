@@ -1,0 +1,143 @@
+.document-entry_container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.625rem;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+    padding: 1.2rem 2rem 2rem 2rem;
+    height: 95%;
+}
+
+.document-entry_header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: #949494;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    .document-entry_source-link {
+        text-decoration: underline;
+        outline: none;
+        color: #949494;
+    }
+}
+
+.document-entry_title {
+    margin: 0;
+    font-size: 1.625rem;
+    font-weight: 500;
+}
+
+.document-entry_tags-wrapper {
+    margin: 0.9rem 0;
+    display: flex;
+    gap: 0.8rem;
+
+    .document-entry_tag {
+        border-radius: 0.3125rem;
+        padding: 0.2rem 0.8rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.015rem;
+
+        &.tech-tag {
+            background: #FFB64F;
+        }
+
+        &.digest-tag {
+            background: #5970FF;
+            color: #FFF;
+        }
+
+        &.announcement-tag {
+            background: #7CE3E1;
+        }
+    }
+}
+
+.document-entry_image-wrapper {
+    text-align: center;
+    width: inherit;
+
+    img {
+        max-height: 12rem;
+        max-width: 100%;
+        border-radius: 0.625rem;
+
+    }
+}
+
+
+.document-entry_text-wrapper {
+    margin: 1.25rem 0 2rem 0;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1rem;
+}
+
+.document-entry_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex: 1;
+
+    .document-entry_button {
+        background: #7CE3E1;
+        font-size: 1rem;
+        padding: 0.85rem 1.8rem;
+    }
+
+    .document-entry_word-count {
+        color: #949494;
+        font-size: 1rem;
+    }
+}
+
+
+@media (max-width: 768px) {
+    
+    .document-entry_header {
+        font-size: 0.875rem;
+    }
+
+    .document-entry_title {
+        font-size: 1.1875rem
+    }
+
+    .document-entry_tag {
+        font-size: 0.625rem;
+    }
+
+    .document-entry_text-wrapper {
+        font-size: 0.875rem;
+    }
+
+}
+
+@media (max-width: 425px) {
+    
+    .document-entry_container {
+        padding: 1.2rem;
+
+        .document-entry_header p {
+            margin: 0;
+        }
+    }
+
+    .document-entry_footer {
+
+        .document-entry_button {
+            font-size: 0.875rem;
+            padding: 0.75rem 1.5rem;
+            line-height: normal;
+        }
+
+        .document-entry_word-count {
+            font-size: 0.875rem;
+            text-align: right;
+        }
+    }
+}
+
+
+
+

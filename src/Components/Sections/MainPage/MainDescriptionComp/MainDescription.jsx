@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-
-import './MainDescription.scss'
+import { NavLink } from "react-router-dom";
 
 import Button from "../../../ButtonComp/Button";
+
+import './MainDescription.scss'
 
 
 const MainDescription = () => {
@@ -28,16 +29,16 @@ const MainDescription = () => {
         }, [isAboveBreakpoint]);
 
     return (
-        <div className="main-description-container">
-            <div className="description-wrapper">
-                <h1 className="main-title">Сервис по поиску<br/>публикаций<br/>о компании<br/>по его ИНН</h1>
+        <div className="main-description_container">
+            <div className="main-description_wrapper">
+                <h1 className="main-title">Сервис по поиску<br/>публикаций<br/>о компании<br/>по ее ИНН</h1>
                 {isAboveBreakpoint ? 
-                <p className="main-description">Комплексный анализ публикаций, получение данных<br/> в формате PDF на электронную почту.</p>
-                : <p className="main-description">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>
+                <p className="main-section_description">Комплексный анализ публикаций, получение данных<br/> в формате PDF на электронную почту.</p>
+                : <p className="main-section_description">Комплексный анализ публикаций, получение данных в формате PDF на электронную почту.</p>
                 }
-                <Button color='#5970FF' textColor='#FFF' text='Запросить данные' />
+                <NavLink to={`/search`}><Button backgroundColor='#5970FF' textColor='#FFF' text='Запросить данные' className={'main-section_request-data_button'} /></NavLink>
             </div>
-            <div className="main-image-wrapper"></div>
+            <div className="main-section_image-wrapper"></div>
         </div>
     )
 }

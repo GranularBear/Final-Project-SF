@@ -1,0 +1,73 @@
+.scan-field_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1.2fr;
+    grid-template-areas:
+        'inputs checkboxes'
+        'inputs button';
+    padding: 2rem 2.5rem;
+    border-radius: 0.625rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
+}
+
+.scan-field_obligatory-scan-inputs-wrapper {
+    grid-area: inputs;
+}
+
+.scan-field_checkboxes-wrapper {
+    grid-area: checkboxes;
+}
+
+.scan-field_button-wrapper {
+    grid-area: button;
+    align-self: flex-end;
+    justify-self: end;
+    width: 70%;
+}
+
+.scan-field_incorrect-input {
+    border: 1px solid #FF5959 !important; 
+    box-shadow: 0px 0px 20px 0px rgba(255, 89, 89, 0.20);
+}
+
+.scan-field_incorrect-input:focus {
+    border: 1px solid #FF5959 !important; 
+    box-shadow: 0px 0px 20px 0px rgba(255, 89, 89, 0.20);
+    outline: none;
+}
+
+.scan-field_scan-input_label .asterix.required_not-filled {
+    color: #FF5959;
+}
+
+.scan-field_submit-button {
+    width: 100%;
+}
+
+.scan-field_scan-input_entry::-webkit-inner-spin-button,
+.scan-field_scan-input_entry::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.scan-field_scan-input_wrapper:not(:last-child) {
+    margin-bottom: 0.6325rem;
+    width: 55%;
+}
+
+.scan-field_checkboxes-wrapper {
+    margin-top: 1rem;
+}
+
+.scan-field_checkbox-wrapper:not(:last-child) {
+    margin-bottom: 0.94rem;
+}
+
+.scan-field_additional-info {
+    font-size: 0.875rem;
+    letter-spacing: 0.02625rem;
+    color: #949494;
+    margin: 0;
+    margin-top: 0.62rem;
+}
