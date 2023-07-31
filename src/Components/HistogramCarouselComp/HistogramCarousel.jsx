@@ -84,9 +84,9 @@ const CarouselContent = ({data}) => {
         }
 
     return (
-        <div className="histogram-carousel-container"  ref={carouselContainerRef}>
+        <div className="histogram-carousel_container"  ref={carouselContainerRef}>
             <div className={`histogram-carousel_arrow left ${isArrowActive.left ? 'active' : ''}`} onClick={movePrev}/>
-            <div className="histogram-carousel-wrapper">
+            <div className="histogram-carousel_wrapper">
                 <div className="histogram-carousel_cell initial-cell">
                     <p className="histogram-carousel_cell-info initial-cell">Период</p>
                     <p className="histogram-carousel_cell-info initial-cell">Всего</p>
@@ -119,8 +119,8 @@ const CarouselContent = ({data}) => {
 const NoDataCarousel = () => {
 
     return (
-        <div className="histogram-carousel-container no-data-carousel">
-            <div className="histogram-carousel-wrapper">
+        <div className="histogram-carousel_container no-data-carousel">
+            <div className="histogram-carousel_wrapper">
                 <div className="histogram-carousel_cell initial-cell">
                     <p className="histogram-carousel_cell-info initial-cell">Период</p>
                     <p className="histogram-carousel_cell-info initial-cell">Всего</p>

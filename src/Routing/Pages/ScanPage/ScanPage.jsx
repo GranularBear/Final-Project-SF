@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useAuth } from "../../../AuthContext";
 
 import Header from '../../../Components/Sections/HeaderComp/Header';
-import ScanFieldSection from '../../../Components/Sections/SearchPage/ScanFieldSection/ScanFieldSection';
-import SearchLoaderSection from '../../../Components/Sections/SearchPage/SearchLoaderSection/SearchLoaderSection';
-import SearchSummarySection from '../../../Components/Sections/SearchPage/SearchSummarySection/SearchSummarySection';
+import ScanFieldSection from '../../../Components/Sections/ScanPage/ScanFieldSection/ScanFieldSection';
+import ScanLoaderSection from '../../../Components/Sections/ScanPage/ScanLoaderSection/ScanLoaderSection';
+import ScanSummarySection from '../../../Components/Sections/ScanPage/ScanSummarySection/ScanSummarySection';
 import Footer from '../../../Components/Sections/FooterComp/Footer';
 
-import classes from './SearchPage.module.scss';
+import classes from './ScanPage.module.scss';
 
-const SearchPage = (props) => {
+const ScanPage = (props) => {
     const { loadingHistogram, setLoadingHistogram, isScanAttempted, setIsScanAttempted } = useAuth();
 
     useEffect(() => {
@@ -24,9 +24,9 @@ const SearchPage = (props) => {
                 {!isScanAttempted && !loadingHistogram ?
                     <ScanFieldSection />
                 : isScanAttempted && loadingHistogram ?
-                    <SearchLoaderSection />
+                    <ScanLoaderSection />
                 : isScanAttempted && !loadingHistogram ?
-                    <SearchSummarySection /> 
+                    <ScanSummarySection /> 
                 : ''
                 }
             </main>
@@ -35,4 +35,4 @@ const SearchPage = (props) => {
     )
 }
 
-export default SearchPage;
+export default ScanPage;

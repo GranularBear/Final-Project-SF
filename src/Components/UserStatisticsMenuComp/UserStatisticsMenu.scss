@@ -1,4 +1,4 @@
-.user-statistics-menu {
+.user-statistics-menu_container {
     position: absolute;
     right: 25%;
     transform: translateX(25%);
@@ -13,12 +13,12 @@
     padding-right: 0.5rem;
 }
 
-.user-statistics-entries {
+.user-statistics-menu_entries {
     text-align: right;
     column-gap: 0.56rem;
 }
 
-.user-statistics-entry-title {
+.user-statistics-menu_entry-title {
     margin: 0;
     font-size: 0.625rem;
     color: rgba(#000000, .5);
@@ -27,32 +27,32 @@
     grid-template-columns: 1fr 0.2fr;
 }
 
-.entry-value {
+.user-statistics-menu_entry-value {
     text-align: center;
-}
 
-.entry-value.first {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #000000;
-}
+    &.user-statistics-menu_first-entry {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #000000;
+    }
 
-.entry-value.second {
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #8AC540;
+    &.user-statistics-menu_second-entry {
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: #8AC540;
+    }
 }
 
 @media (max-width: 1100px) {
     
-    .user-statistics-menu{
+    .user-statistics-menu_container {
         padding: 0;
     }
 }
 
 @media (max-width: 980px) {
     
-    .user-statistics-menu {
+    .user-statistics-menu_container {
         right: 50%;
         transform: translateX(50%);
     }
@@ -60,7 +60,7 @@
 
 @media (max-width: 650px) {
     
-    .user-statistics-menu {
+    .user-statistics-menu_container {
         right: 45%;
         transform: translateX(45%);
     }
@@ -68,7 +68,7 @@
 
 @media (max-width: 500px) {
     
-    .user-statistics-menu {
+    .user-statistics-menu_container {
         right: 35%;
         transform: translateX(35%);
         min-width: 8.25rem;
@@ -77,20 +77,20 @@
         padding: 0.2rem 0 0.3rem 0.5rem;
     }
 
-    .user-statistics-entry-title {
+    .user-statistics-menu_entry-title {
         font-size: 0.5rem;
         grid-template-columns: none;
         text-align: left;
     }
 
-    .entry-value {
+    .user-statistics-menu_entry-value {
         text-align: left;
     }
 }
 
 @media (max-width: 370px) {
 
-    .user-statistics-menu {
+    .user-statistics-menu_container {
         min-width: 5.25rem;
         right: 25%;
         transform: translateX(25%);
@@ -99,7 +99,7 @@
 
 @media (max-width: 320px) {
     
-    .user-statistics-menu {
+    .user-statistics-menu_container {
         right: 30%;
     }
 }

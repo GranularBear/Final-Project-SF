@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import Carousel from "../../../CarouselComp/Carousel";
+import MainPageCarousel from "../../../MainPageCarouselComp/MainPageCarousel";
 
 import "./MainReasons.scss"
 
@@ -27,13 +27,13 @@ const MainReasons = () => {
         }, [isAboveBreakpoint]);
 
     return (
-        <div className="reasons-wrapper">
+        <div className="main-reasons_wrapper">
             {isAboveBreakpoint ?
             <h2 className="sub-title">Почему именно мы</h2>
             : <h2 className="sub-title">Почему<br/>именно мы</h2>
             }
-            <Carousel />
-            <div className="image-wrapper"></div>
+            <MainPageCarousel />
+            <div className="main-reasons_image-wrapper"></div>
         </div>
     )
 }

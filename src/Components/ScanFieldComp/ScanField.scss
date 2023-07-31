@@ -1,4 +1,4 @@
-.scan-field-container {
+.scan-field_container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1.2fr;
@@ -11,19 +11,15 @@
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.20);
 }
 
-.search-input-field-label .asterix.required_not-filled {
-    color: #FF5959;
-}
-
-.obligatory-scan-inputs-wrapper {
+.scan-field_obligatory-scan-inputs-wrapper {
     grid-area: inputs;
 }
 
-.scan-checkboxes-wrapper {
+.scan-field_checkboxes-wrapper {
     grid-area: checkboxes;
 }
 
-.scan-field-button-wrapper {
+.scan-field_button-wrapper {
     grid-area: button;
     align-self: flex-end;
     justify-self: end;
@@ -41,30 +37,34 @@
     outline: none;
 }
 
-.scanField_submit-button {
+.scan-field_scan-input_label .asterix.required_not-filled {
+    color: #FF5959;
+}
+
+.scan-field_submit-button {
     width: 100%;
 }
 
-.search-input-field-entry::-webkit-inner-spin-button,
-.search-input-field-entry::-webkit-outer-spin-button {
+.scan-field_scan-input_entry::-webkit-inner-spin-button,
+.scan-field_scan-input_entry::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.search-input-wrapper:not(:last-child) {
+.scan-field_scan-input_wrapper:not(:last-child) {
     margin-bottom: 0.6325rem;
     width: 55%;
 }
 
-.scan-checkboxes-wrapper {
+.scan-field_checkboxes-wrapper {
     margin-top: 1rem;
 }
 
-.checkbox-wrapper:not(:last-child) {
+.scan-field_checkbox-wrapper:not(:last-child) {
     margin-bottom: 0.94rem;
 }
 
-.scan-field-additional-info {
+.scan-field_additional-info {
     font-size: 0.875rem;
     letter-spacing: 0.02625rem;
     color: #949494;

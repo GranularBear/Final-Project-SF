@@ -17,7 +17,7 @@
     }
 }
 
-.authorization-form-container {
+.authorization-form_container {
     position: relative;
     margin: 0;
     margin-bottom: 30px;
@@ -28,18 +28,18 @@
     width: 26.8rem;
 }
 
-.lock-icon {
+.authorization-form_lock-icon {
     position: absolute;
     top: -60px;
     left: -50px;
 }
 
-.authorization-form-buttons-wrapper {
+.authorization-form_buttons-wrapper {
     display: flex;
     justify-content: space-around;
 }
 
-.authorization-form-button {
+.authorization-form_button {
     padding: 0.2rem 1.5rem;
     background-color: #FFF;
     color: #C7C7C7;
@@ -50,28 +50,28 @@
     text-align: center;
 }
 
-.authorization-form-button.active {
+.authorization-form_button.active {
     color: #029491;
     border-bottom: 2px #029491 solid;
 }
 
-.authorization-input-form {
+.authorization_input-form {
     margin-top: 40px;
     display: grid;
     grid-template-rows: 1fr 1fr 0.9fr auto;
     row-gap: 20px;
 }
 
-.authorization-input-wrapper {
+.authorization_input-wrapper {
     margin-bottom: 15px;
 }
 
-.authorization-input-field-label {
+.authorization_input-field-label {
     margin-bottom: 15px;
     color: #949494;
 }
 
-.authorization-input-field-value {
+.authorization_input-field-value {
     color: black;
 }
 
@@ -86,7 +86,7 @@
     box-shadow: 0px 0px 20px 0px rgba(255, 89, 89, 0.20);
 }
 
-.authorization-form-submit-button {
+.authorization-form_submit-button {
     color: #FFF;
     font-size: 26px;
     background-color: #5970FF;
@@ -94,30 +94,30 @@
     align-self: center;
 }
 
-.authorization-form-submit-button.active {
+.authorization-form_submit-button.active {
     opacity: 100%;
     cursor: pointer;
 }
 
-.restore-password-link {
+.authorization-form_restore-password-link {
     color: #5970FF;
     text-align: center;
 }
 
-.restore-password-link:visited {
+.rauthorization-form_restore-password-link:visited {
     color: #5970FF;
 }
 
-.alternative-login-menu {
+.authorization-form_alternative-login-menu {
     margin-top: 30px;
     color: #949494;
 }
 
-.alternative-login-menu p {
+.authorization-form_alternative-login-menu p {
     @include font(wideScreen);
 }
 
-.alternative-login-options {
+.authorization-form_alternative-login-options {
     list-style-type: none;
     display: flex;
     margin: 0;
@@ -154,65 +154,65 @@
 
 @media (max-width: 1920px) {
 
-    .authorization-form-button {
+    .authorization-form_button {
         @include font(regularScreen);
     }
     
-    .alternative-login-menu p {
+    .authorization-form_alternative-login-menu p {
         @include font(regularScreen);
     }
 
-    .authorization-form-submit-button {
+    .authorization-form_submit-button {
         font-size: 22px;
     }
 
-    .restore-password-link {
+    .authorization-form_restore-password-link {
         font-size: 14px;
     }
 }
 
 @media (max-width: 1450px) {
 
-    .authorization-form-container {
+    .authorization-form_container {
         width: 20.5rem;
     }
 }
 
 @media (max-width: 980px) {
     
-    .lock-icon {
+    .authorization-form_lock-icon {
         left: 5rem;
     }
 
-    .authorization-form-container {
+    .authorization-form_container {
         margin: 0;
     }
 
-    .authorization-form-button {
+    .authorization-form_button {
         @include font(tablet);
     }
     
-    .alternative-login-menu p {
+    .authorization-form_alternative-login-menu p {
         @include font(tablet);
     }
 
-    .authorization-form-submit-button {
+    .authorization-form_submit-button {
         font-size: 1.25rem;
     }
 }
 
 @media (max-width: 400px) {
 
-    .lock-icon {
+    .authorization-form_lock-icon {
         top: -4.5rem;
     }
     
-    .authorization-form-container {
+    .authorization-form_container {
         padding: 1.5rem 0.9rem 1.25rem 0.94rem;
         width: 16.5rem;
     }
 
-    .authorization-form-button {
+    .authorization-form_button {
         padding: 0.2rem 0.5rem;
     }
 }

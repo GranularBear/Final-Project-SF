@@ -41,8 +41,6 @@ export const AuthProvider = ({ children }) => {
     const loadDocuments = async () => {
         const IDsToLoad = documentIDs.slice(currentDocumentPage * 10, (currentDocumentPage + 1) * 10).map(item => item.encodedId);
 
-        console.log(IDsToLoad)
-
         const response = await fetch('https://gateway.scan-interfax.ru/api/v1/documents', {
             method: "POST",
             headers: {

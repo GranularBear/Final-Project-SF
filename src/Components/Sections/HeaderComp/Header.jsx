@@ -34,7 +34,7 @@ const Header = (props) => {
 
     return (
         <header className="header">
-                <NavLink to={`/`} className="header-logo"></NavLink>
+                <NavLink to={`/`} className="header_logo"></NavLink>
                     <nav className={`nav-menu ${isMobileMenuOpen ? 'open' : ''}`}>
                         <ul className="nav-list">
                              <li><NavLink className={`nav-list-link`} to={`/`}>Главная</NavLink></li>

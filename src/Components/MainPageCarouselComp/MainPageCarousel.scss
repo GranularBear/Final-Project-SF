@@ -1,4 +1,4 @@
-.carousel-arrow {
+.main-carousel_arrow {
     border: solid rgba(0, 0, 0, 0.2);
     border-width: 0 5px 5px 0;
     display: inline-block;
@@ -19,7 +19,7 @@
     }
 }
 
-.carousel-wrapper {
+.main-carousel_wrapper {
     height: 225px;
     margin-bottom: 3rem;
     display: grid;
@@ -28,18 +28,7 @@
     align-items: center;
 }
 
-.carousel-card {
-    height: inherit;
-    padding: 2rem;
-    width: auto;
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-    font-size: 24px;
-    line-height: 32px;
-    letter-spacing: 0.01em
-}
-
-.carousel-card-container {
+.main-carousel_card-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 30px;
@@ -50,46 +39,56 @@
     }
 }
 
+.main-carousel_card {
+    height: inherit;
+    padding: 2rem;
+    width: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.01em
+}
+
 
 @media (max-width: 1920px) {
-    .carousel-card {
+    .main-carousel_card {
         font-size: 18px;
         line-height: 22px;
     }
 }
 
 @media (max-width: 1400px) {
-    .carousel-card {
+    .main-carousel_card {
         font-size: 16px;
     }
 }
 
 @media (max-width: 1100px) {
-    .carousel-card {
+    .main-carousel_card {
         font-size: 1rem;
     }
 }
 
 @media (max-width: 980px) {
     
-    .carousel-card {
+    .main-carousel_card {
         width: 25rem;
-        // height: 12rem;
     }
 }
 
 @media (max-width: 650px) {
 
-    .carousel-wrapper {
+    .main-carousel_wrapper {
         gap: 0;
     }
 
-    .carousel-card {
+    .main-carousel_card {
         width: 90%;
         max-width: 18.625rem;
     }
 
-    .carousel-card p {
+    .main-carousel_card p {
         margin-top: 0.5rem;
         margin-bottom: 0;
     }
@@ -97,9 +96,7 @@
 
 @media (max-width: 500px) {
     
-    .carousel-card p{
+    .main-carousel_card p {
         margin-top: 0.7rem;
-        // font-size: 0.875rem;
-        // line-height: 1rem;
     }
 }

@@ -1,28 +1,15 @@
 import React, { useState, useEffect } from "react";
 
-import './Carousel.scss';
+import carouselMockText from "./CarouselMockText";
 
-const carouselCards = [{
-    text: 'Высокая и оперативная скорость обработки заявки',
-    icon: require('./icons/TimerIcon.jpg')
-}, {
-    text: 'Огромная комплексная база данных, обеспечивающая объективный ответ на запрос',
-    icon: require('./icons/MagnifyingGlassIcon.jpg')
-}, {
-    text: 'Защита конфеденциальных сведений, не подлежащих разглашению по федеральному законодательству',
-    icon: require('./icons/ShieldIcon.jpg')
-}, {
-    text: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
-    icon: require('./icons/MagnifyingGlassIcon.jpg')
-}, {
-    text: 'Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum',
-    icon: require('./icons/ShieldIcon.jpg')
-}]
+import './MainPageCarousel.scss';
 
-const Carousel = () => {
+const MainPageCarousel = () => {
         const [currentCard, setCurrentCard] = useState(0);
         const [screenWidth, setScreenWidth] = useState(window.innerWidth);
         const [isAboveBreakpoint, setIsAboveBreakpoint] = useState(screenWidth > 980);
+
+        const carouselCards = carouselMockText;
 
         const nextCard = () => {
             setCurrentCard((prevCard) => (prevCard + 1) % carouselCards.length);
@@ -67,12 +54,12 @@ const Carousel = () => {
         }, [isAboveBreakpoint]);
 
     return (
-            <div className="carousel-wrapper">
-                <i className="carousel-arrow left" onClick={prevCard}/>
-                <div className={`carousel-card-container ${visilbeCardsCount === 1 ? 'single-card' : ''}`}>
+            <div className="main-carousel_wrapper">
+                <i className="main-carousel_arrow left" onClick={prevCard}/>
+                <div className={`main-carousel_card-container ${visilbeCardsCount === 1 ? 'single-card' : ''}`}>
                 {getVisibleCards().map((card, index) => (
                     <div
-                        className={`carousel-card ${index === 1 ? 'active' : '' }`}
+                        className={`main-carousel_card ${index === 1 ? 'active' : '' }`}
                         key={card.text + index}
                     >
                         <img src={card.icon} alt='Card Icon' />
@@ -80,9 +67,9 @@ const Carousel = () => {
                     </div>
                 ))}
                 </div>
-                <i className="carousel-arrow right" onClick={nextCard} />
+                <i className="main-carousel_arrow right" onClick={nextCard} />
             </div>
     )
 }
 
-export default Carousel;
+export default MainPageCarousel;

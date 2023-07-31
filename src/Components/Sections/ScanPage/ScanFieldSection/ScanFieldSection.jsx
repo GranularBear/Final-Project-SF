@@ -3,14 +3,13 @@ import React from "react";
 import ScanField from "../../../ScanFieldComp/ScanField";
 
 import './ScanFieldSection.scss';
-import ScanDocumentsEntry from "../../../ScanDocumentsEntryComp/ScanDocumentEntry";
 
 const ScanFieldSection = () => {
     return (
             <>
                 <div className="scan-field-section_container">
                     <div className="scan-field-section_description-wrapper">
-                        <h2 className="scan-field-section_sub-title">Найдите необходимые данные в пару кликов</h2>
+                        <h2 className="sub-title scan-field-section_sub-title">Найдите необходимые данные в пару кликов</h2>
                         <div className="scan-field-section_document-icon scan-field_description-wrapper_mobile-icon"></div>
                         <p className="scan-field-section_description">Задайте параметры поиска.</p>
                         <p className="scan-field-section_description">Чем больше заполните, тем точнее поиск</p>

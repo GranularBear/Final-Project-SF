@@ -1,33 +1,29 @@
-.authorization-comp-wrapper {
+.authorization-comp_wrapper {
     display: grid;
     grid-template-columns: 1fr 0.7fr;
     align-items: center;
     margin-top: 2rem;
 }
 
-.authorization-title {
-    font-family: Ferry;
+.authorization-description-wrapper .authorization-title {
+    font-family: 'Ferry';
     font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 3.375rem;
-    letter-spacing: 0.01em;
-    text-align: left;
-    margin: 0;
     margin-bottom: 4.375rem;
 }
 
-.characters-icon {
-    background-image: url(../../../../Icons/authorization-characters-icon.svg);
+.authorization-comp_characters-icon {
+    background-image: url(../../../../Icons/AuthorizationPage/authorization-characters-icon.svg);
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
     height: 21.3rem;
     margin-left: 12.5rem;
+    margin-top: 2rem;
 }
 
-.characters-icon-mobile {
+.authorization-comp_characters-icon-mobile {
     display: none;
-    background-image: url(../../../../Icons/authorization-characters-icon.svg);
+    background-image: url(../../../../Icons/AuthorizationPage/authorization-characters-icon.svg);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -40,7 +36,7 @@
 
 @media (max-width: 1920px) {
 
-    .authorization-title {
+    .authorization-description_wrapper .authorization-title {
         font-size: 2.5rem;
         line-height: 3rem;
     }
@@ -48,31 +44,31 @@
 
 @media (max-width: 1450px) {
 
-    .authorization-title {
+    .authorization-description_wrapper .authorization-title {
         font-size: 2rem;
         line-height: 2.3rem;
     }
 
-    .characters-icon {
+    .authorization-comp_characters-icon {
         margin-left: 6rem;
     }
 }
 
 @media (max-width: 1100px) {
 
-    .authorization-title {
+    .authorization-description_wrapper .authorization-title {
         font-size: 1.7rem;
         line-height: 2rem;
     }
 
-    .characters-icon {
+    .authorization-comp_characters-icon {
         margin-left: 2rem;
     }
 }
 
 @media (max-width: 980px) {
     
-    .authorization-comp-wrapper {
+    .authorization-comp_wrapper {
         grid-template-columns: none;
         grid-template-rows: 0.6fr 1fr 0.6fr;
         grid-auto-flow: dense;
@@ -80,27 +76,28 @@
         margin: 0;
     }
 
-    .characters-icon {
+    .authorization-comp_characters-icon {
         display: none;
     }
 
-    .characters-icon-mobile {
+    .authorization-comp_characters-icon-mobile {
         display: block;
     }
 }
 
 @media (max-width: 500px) {
     
-    .authorization-title {
+    .authorization-description_wrapper .authorization-title {
         font-size: 1.375rem;
         line-height: normal;
         margin-bottom: 5.375rem;
+        text-align: center;
     }
 }
 
 @media (max-width: 400px) {
     
-    .characters-icon-mobile {
+    .authorization-comp_characters-icon-mobile {
         margin-bottom: 5rem;
     }
 }

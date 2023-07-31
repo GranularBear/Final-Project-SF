@@ -9,7 +9,7 @@ import CustomArrow from '../../Icons/gray-arrow_pointed-down-icon.jpg'
 
 import './FieldInput.scss';
 
-const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName, inputClassName, placeholder, options, htmlFor, errorMessage, onChange, onChange_2, startDate, endDate,...otherProps }) => {
+const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName, inputClassName, placeholder, options, htmlFor, errorMessage, onChange, onChange_2, handleBlur, startDate, endDate,...otherProps }) => {
     const startDateInputRef = useRef(null);
     const endDateInputRef = useRef(null);
 
@@ -103,7 +103,6 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
             <input
                 className={`field-input checkbox-input ${inputClassName}`}
                 type="checkbox"
-                // required={isRequired}
                 onChange={onChange}
                 {...otherProps}
             />
@@ -150,6 +149,11 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                                 selected={startDate}
                                 placeholderText={'Дата начала'}
                                 dateFormat='dd/MM/yyyy'
+                                customInput={
+                                    <InputMask mask='99/99/9999' onBlur={handleBlur}>
+                                        {(inputProps) => <input {...inputProps} />}
+                                    </InputMask>
+                                }
                                 onChange={onChange}
                                 {...otherProps}
                             />
@@ -163,6 +167,11 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                                 selected={endDate}
                                 placeholderText={'Дата конца'}
                                 dateFormat='dd/MM/yyyy'
+                                customInput={
+                                    <InputMask mask='99/99/9999' onBlur={handleBlur}>
+                                        {(inputProps) => <input {...inputProps} />}
+                                    </InputMask>
+                                }
                                 onChange={onChange_2}
                                 {...otherProps}
                             />
@@ -175,7 +184,6 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                     <InputMask
                         className={`field-input ${type + '-input'} ${inputClassName}`}
                         mask={otherProps.mask}
-                        // required={isRequired}
                         placeholder={placeholder}
                         onChange={onChange}
                         {...otherProps}
@@ -184,7 +192,6 @@ const FieldInput = ({ label, type, isRequired, wrapperClassName, labelClassName,
                     <input
                         className={`field-input ${type + '-input'} ${inputClassName}`}
                         type={type}
-                        // required={isRequired}
                         placeholder={placeholder}
                         onChange={onChange}
                         {...otherProps}
@@ -211,8 +218,7 @@ FieldInput.propTypes = {
     errorMessage: PropTypes.string,
     onChange: PropTypes.func,
     onChange_2: PropTypes.func,
-    startDate: PropTypes.instanceOf(Date),
-    endDate: PropTypes.instanceOf(Date),
+    handleBlur: PropTypes.func,
 };
 
 FieldInput.defaultProps = {

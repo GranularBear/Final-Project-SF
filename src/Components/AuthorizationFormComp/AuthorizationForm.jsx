@@ -20,8 +20,6 @@ const AuthorizationForm = () => {
         setLoginValid(validateLogin(event.target.value))
     }
 
-    console.log(loginValid)
-
     const handlePasswordChange = (event) => {
         setPasswordValue(event.target.value);
     }
@@ -76,8 +74,8 @@ const AuthorizationForm = () => {
     const isSubmitDisabled = !loginValue || !loginValid || !passwordValue;
 
     return (
-        <div className="authorization-form-container">
-            <div className="lock-icon">
+        <div className="authorization-form_container">
+            <div className="authorization-form_lock-icon">
                 <svg width="76" height="93" viewBox="0 0 76 93" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Group 1171274237">
                     <path id="Vector" d="M59.9668 62.7647L53.3803 61.3974L61.7177 21.2862C62.0279 19.1831 61.5658 17.0387 60.4171 15.2499C49.9203 0.717884 32.8453 6.62076 30.2274 19.1769L22.7238 55.0276L16.1372 53.6519L24.5496 13.2823C24.9831 11.1939 25.8761 9.2282 27.1639 7.52793C28.4518 5.82767 30.102 4.43552 31.9949 3.45255C53.2052 -7.47776 71.0055 9.51383 67.3788 26.9306L59.9668 62.7647Z" fill="#E0E0E0"/>
@@ -99,18 +97,18 @@ const AuthorizationForm = () => {
                     </g>
                 </svg>
             </div>
-            <div className="authorization-form-buttons-wrapper">
-                <Button text={'Войти'} className={'authorization-form-button sign-in active'} />
-                <Button text={'Зарегистрироваться'} className={"authorization-form-button sign-up"} />
+            <div className="authorization-form_buttons-wrapper">
+                <Button text={'Войти'} className={'authorization-form_button sign-in active'} />
+                <Button text={'Зарегистрироваться'} className={"authorization-form_button sign-up"} />
             </div>
-            <form className="authorization-input-form" onSubmit={handleSubmit}>
+            <form className="authorization_input-form" onSubmit={handleSubmit}>
                 <FieldInput
                     type={'text'}
                     label={'Логин или номер телефона:'}
                     htmlFor={'authorizationField_userLogin'}
-                    wrapperClassName={'authorization-input-wrapper login'}
-                    labelClassName={'authorization-input-field-label'}
-                    inputClassName={`authorization-input-field-value ${loginValid ? '' : 'authorization-input_incorrect'}`}
+                    wrapperClassName={'authorization_input-wrapper login'}
+                    labelClassName={'authorization_input-field-label'}
+                    inputClassName={`authorization_input-field-value ${loginValid ? '' : 'authorization-input_incorrect'}`}
                     id={'authorizationField_userLogin'}
                     name={'authorizationField_userLogin'}
                     value={loginValue}
@@ -122,22 +120,21 @@ const AuthorizationForm = () => {
                     type={'password'}
                     label={'Пароль:'}
                     htmlFor={'authorizationField_userPassword'}
-                    wrapperClassName={'authorization-input-wrapper password'}
-                    labelClassName={'authorization-input-field-label'}
-                    inputClassName={`authorization-input-field-value ${error === '' ? '' : 'authorization-input_incorrect'}`}
+                    wrapperClassName={'authorization_input-wrapper password'}
+                    labelClassName={'authorization_input-field-label'}
+                    inputClassName={`authorization_input-field-value ${error === '' ? '' : 'authorization-input_incorrect'}`}
                     id={'authorizationField_userPassword'}
                     name={'authorizationField_userPassword'}
                     value={passwordValue}
                     onChange={handlePasswordChange}
                     errorMessage={error && `${error}`}
                 />
-                {/* <input type="submit" value='Войти' className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled}></input> */}
-                <Button type={'submit'} text={'Войти'} className={`authorization-form-submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled} />
-                <a className="restore-password-link" href="#">Восстановить пароль</a>
+                <Button type={'submit'} text={'Войти'} className={`authorization-form_submit-button ${isSubmitDisabled ? '' : 'active'}`} disabled={isSubmitDisabled} />
+                <a className="authorization-form_restore-password-link" href="#">Восстановить пароль</a>
             </form>
-            <div className="alternative-login-menu">
+            <div className="authorization-form_alternative-login-menu">
                 <p>Войти через:</p>
-                <ul className="alternative-login-options">
+                <ul className="authorization-form_alternative-login-options">
                     <li className="alternative-login google"></li>
                     <li className="alternative-login facebook"></li>
                     <li className="alternative-login yandex"></li>

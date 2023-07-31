@@ -5,10 +5,10 @@ import HistogramCarousel from "../../../HistogramCarouselComp/HistogramCarousel"
 import ScanDocumentsEntry from "../../../ScanDocumentsEntryComp/ScanDocumentEntry";
 import Button from "../../../ButtonComp/Button";
 
-import './SearchSummarySection.scss';
+import './ScanSummarySection.scss';
 
 
-const SearchSummarySection = () => {
+const ScanSummarySection = () => {
     const [totalDocuments, setTotalDocuments] = useState(0);
     const { histogramData, visibleDocuments, documentIDs, loadDocuments, currentDocumentPage } = useAuth();
 
@@ -27,20 +27,20 @@ const SearchSummarySection = () => {
 
     return (
         <div className="search-summary-section_container">
-            <h3 className="search-summary-section_sub-title">Общая сводка</h3>
+            <h2 className="sub-title search-summary-section_sub-title">Общая сводка</h2>
             <p className="search-summary-section_findings-summary">{`Найдено ${totalDocuments} вариантов`}</p>
             <HistogramCarousel data={histogramData} />
             {!histogramData || !histogramData.data || histogramData.data.length < 2 || !histogramData.data[0].data || !histogramData.data[1].data ? '' : 
             <>
-                <h3 className="search-summary-section_sub-title">Список документов</h3>
+                <h2 className="sub-title search-summary-section_sub-title">Список документов</h2>
                 <div className="search-summary-section_document-list">
                     {visibleDocuments.map(doc => (
-                        <>
                             <ScanDocumentsEntry key={doc.ok.id} newsContent={doc.ok} />
-                        </>
                     ))}
                 </div>
-                {currentDocumentPage * 10 < documentIDs.length && <Button className={`search-summary-section_button`} text={'Показать больше'} onClick={loadDocuments} />}
+                {currentDocumentPage * 10 < documentIDs.length && visibleDocuments.length ?
+                <Button className={`search-summary-section_button`} text={'Показать больше'} onClick={loadDocuments} />
+                : <p className="search-summary-section_loading-info">Список документов загружается. Пожалуйста, подождите</p>}
             </>
         }
         </div>
@@ -48,4 +48,4 @@ const SearchSummarySection = () => {
     )
 }
 
-export default SearchSummarySection;
+export default ScanSummarySection;

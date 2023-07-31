@@ -1,6 +1,6 @@
 import React from "react";
 
-import loaderImage from '../../Icons/loader-icon.jpg';
+import loaderImage from '../../Icons/Loaders/loader-icon.jpg';
 
 import './Loader.scss';
 

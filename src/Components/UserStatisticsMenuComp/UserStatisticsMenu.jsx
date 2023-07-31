@@ -9,15 +9,15 @@ const UserStatisticsMenu = () => {
     const { userData, loadingUserData } = useAuth();
 
     return (
-        <div className='user-statistics-menu'>
+        <div className='user-statistics-menu_container'>
             {!loadingUserData ?
-                <div className="user-statistics-entries">
-                    <div className="entry-titles-wrapper">
-                        <div className='user-statistics-entry-title'>Использовано компаний
-                            <div className='entry-value first'>{userData.eventFiltersInfo.usedCompanyCount}</div>
+                <div className="user-statistics-menu_entries">
+                    <div className="user-statistics-menu_entry-titles-wrapper">
+                        <div className='user-statistics-menu_entry-title'>Использовано компаний
+                            <div className='user-statistics-menu_entry-value user-statistics-menu_first-entry'>{userData.eventFiltersInfo.usedCompanyCount}</div>
                         </div>
-                        <div className='user-statistics-entry-title'>Лимит по компаниям
-                            <div className='entry-value second'>{userData.eventFiltersInfo.companyLimit}</div>
+                        <div className='user-statistics-menu_entry-title'>Лимит по компаниям
+                            <div className='user-statistics-menu_entry-value user-statistics-menu_second-entry'>{userData.eventFiltersInfo.companyLimit}</div>
                         </div>
                     </div>
                 </div>

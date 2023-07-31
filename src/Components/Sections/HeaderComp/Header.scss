@@ -24,8 +24,8 @@
     @include font(wideScreen);
 }
 
-.header-logo {
-    background-image: url(../../../Icons/header-logo.svg);
+.header_logo {
+    background-image: url(../../../Icons/Header/header-logo.svg);
     background-size: contain;
     background-position: left;
     background-repeat: no-repeat;
@@ -274,7 +274,7 @@
 .dropdown-menu-logo {
     visibility: hidden;
     position: relative;
-    background-image: url(../../../Icons/header-logo-white.svg);
+    background-image: url(../../../Icons/Header/header-logo-white.svg);
     background-size: contain;
     background-repeat: no-repeat;
     height: 8.8125rem;
@@ -422,7 +422,7 @@
 
 @media (max-width: 320px) {
 
-    .header-logo,
+    .header_logo,
     .dropdown-menu-logo {
         width: 6rem;
         height: 6rem;
