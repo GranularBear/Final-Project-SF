@@ -20,8 +20,6 @@ const ScanSummarySection = () => {
             });
             setTotalDocuments(total);
         }
-
-        console.log(totalDocuments)
     }, [histogramData, totalDocuments])
 
 

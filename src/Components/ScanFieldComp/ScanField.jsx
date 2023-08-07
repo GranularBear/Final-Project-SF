@@ -37,15 +37,7 @@ const ScanField = (props) => {
     const [datesValid, setDatesValid] = useState(true);
     const [datesError, setDatesError] = useState('');
 
-    useEffect(() => {
-        if (isScanAttempted) {
-            if(TINValid) {
-                console.log('Submitted');
-            } else {
-                console.log(`Not Submitted: ${TINError}`)
-            }
-        }
-    }, [TINValid, TINError, isScanAttempted]);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const handleTINChange = (event) => {
         let value = event.target.value.replace(/[_()-]+/g,'');
@@ -172,90 +164,83 @@ const ScanField = (props) => {
         }
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
 
         setTINValid(validateTIN(TINValue));
         setDocumentQuantityValid(validateDocumentQuantity(documentQuantityValue));
         setDatesValid(validateDates(startDate, endDate));
 
-        if (TINValid && TINValue !== null && documentQuantityValid && documentQuantityValue !== null && datesValid && startDate !== null && endDate !== null) {
-            setLoadingHistogram(true);
-            setIsScanAttempted(true);
+        setFormSubmitted(true);
 
-            const payload = {
-                "issueDateInterval": {
-                    "startDate": startDate.toISOString(),
-                    "endDate": endDate.toISOString()
-                },
-                "searchContext": {
-                    "targetSearchEntitiesContext": {
-                        targetSearchEntities: [
-                            {
-                                "type": "company",
-                                "sparkId": null,
-                                "entityId": null,
-                                "inn": TINValue,
-                                "maxFullness": checkboxes['scanField_maxCompletenessCheckbox'],
-                                "inBusinessNews": checkboxes['scanField_businessContextCheckbox']
+    }
+
+    useEffect(() => {
+        const submitForm = async() => {
+            if (TINValid && TINValue !== null && documentQuantityValid && documentQuantityValue !== null && datesValid && startDate !== null && endDate !== null) {
+                setLoadingHistogram(true);
+                setIsScanAttempted(true);
+    
+                const payload = {
+                    "issueDateInterval": {
+                        "startDate": startDate.toISOString(),
+                        "endDate": endDate.toISOString()
+                    },
+                    "searchContext": {
+                        "targetSearchEntitiesContext": {
+                            targetSearchEntities: [
+                                {
+                                    "type": "company",
+                                    "sparkId": null,
+                                    "entityId": null,
+                                    "inn": TINValue,
+                                    "maxFullness": checkboxes['scanField_maxCompletenessCheckbox'],
+                                    "inBusinessNews": checkboxes['scanField_businessContextCheckbox']
+                                }
+                            ],
+                            "onlyMainRole": checkboxes['scanField_mainRoleCheckbox'],
+                            "tonality": tonality,
+                            "onlyWithRiskFactors": checkboxes['scanField_RiskFactorsOnlyCheckbox'],
+                            "riskFactors": {
+                                "and": [],
+                                "or": [],
+                                "not": []
+                            },
+                            "themes": {
+                                "and": [],
+                                "or": [],
+                                "not": []
                             }
-                        ],
-                        "onlyMainRole": checkboxes['scanField_mainRoleCheckbox'],
-                        "tonality": tonality,
-                        "onlyWithRiskFactors": checkboxes['scanField_RiskFactorsOnlyCheckbox'],
-                        "riskFactors": {
-                            "and": [],
-                            "or": [],
-                            "not": []
                         },
-                        "themes": {
+                        "themesFilter": {
                             "and": [],
                             "or": [],
                             "not": []
                         }
                     },
-                    "themesFilter": {
-                        "and": [],
-                        "or": [],
-                        "not": []
+                    "searchArea": {
+                        "includedSources": [],
+                        "excludedSources": [],
+                        "includedSourceGroups": [],
+                        "excludedSourceGroups": []
+                    },
+                    "similarMode": "duplicates",
+                    "limit": documentQuantityValue,
+                    "sortType": "issueDate",
+                    "sortDirectionType": "desc",
+                    "intervalType": "month",
+                    "histogramTypes": [
+                        "totalDocuments",
+                        "riskFactors"
+                    ],
+                    "attributeFilters": {
+                        "excludeTechNews": checkboxes['scanField_includeTechMarketNewsCheckbox'],
+                        "excludeAnnouncements": checkboxes['scanField_includePreviewAndCalendarsCheckbox'],
+                        "excludeDigets": checkboxes['scanField_includeNewsSummaryCheckbox']
                     }
-                },
-                "searchArea": {
-                    "includedSources": [],
-                    "excludedSources": [],
-                    "includedSourceGroups": [],
-                    "excludedSourceGroups": []
-                },
-                "similarMode": "duplicates",
-                "limit": documentQuantityValue,
-                "sortType": "issueDate",
-                "sortDirectionType": "desc",
-                "intervalType": "month",
-                "histogramTypes": [
-                    "totalDocuments",
-                    "riskFactors"
-                ],
-                "attributeFilters": {
-                    "excludeTechNews": checkboxes['scanField_includeTechMarketNewsCheckbox'],
-                    "excludeAnnouncements": checkboxes['scanField_includePreviewAndCalendarsCheckbox'],
-                    "excludeDigets": checkboxes['scanField_includeNewsSummaryCheckbox']
-                }
-            };
-
-            const histogramResponse = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (histogramResponse.status === 200) {
-                const histogramData = await histogramResponse.json();
-                setHistogramData(histogramData);
+                };
     
-                const documentIDsResponse = await fetch ('https://gateway.scan-interfax.ru/api/v1/objectsearch/', {
+                const histogramResponse = await fetch('https://gateway.scan-interfax.ru/api/v1/objectsearch/histograms', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -264,18 +249,37 @@ const ScanField = (props) => {
                     body: JSON.stringify(payload)
                 });
     
-                const documentIDs = await documentIDsResponse.json();
-                setDocumentIDs(documentIDs.items);
-                setLoadingHistogram(false);
-            } else if (histogramResponse.status === 401) {
-                navigate('/authorization');
-                setIsLoggedIn(false);
-                alert('Время сессии истекло. Пожалуйста, пройдите авторизацию')
-            } else {
-                console.error('Failed to fetch the data')
+                if (histogramResponse.status === 200) {
+                    const histogramData = await histogramResponse.json();
+                    setHistogramData(histogramData);
+        
+                    const documentIDsResponse = await fetch ('https://gateway.scan-interfax.ru/api/v1/objectsearch/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+        
+                    const documentIDs = await documentIDsResponse.json();
+                    setDocumentIDs(documentIDs.items);
+                    setLoadingHistogram(false);
+                } else if (histogramResponse.status === 401) {
+                    navigate('/authorization');
+                    setIsLoggedIn(false);
+                    alert('Время сессии истекло. Пожалуйста, пройдите авторизацию')
+                } else {
+                    console.error('Failed to fetch the data')
+                }
             }
         }
-    }
+
+        if (formSubmitted) {
+            submitForm();
+            setFormSubmitted(false);     
+        }
+    }, [formSubmitted, TINValue, TINValid, startDate, endDate, datesValid, documentQuantityValue, documentQuantityValid, checkboxes, navigate, setDocumentIDs, setHistogramData, setIsLoggedIn, setIsScanAttempted, setLoadingHistogram, tonality])
 
     return (
         <form className="scan-field_container" onSubmit={handleSubmit}>

@@ -39,6 +39,10 @@
     @include font(wideScreen);
 }
 
+.field-input:focus {
+    outline: none;
+}
+
 .checkbox-wrapper {
     flex-direction: row;
     align-items: center;
