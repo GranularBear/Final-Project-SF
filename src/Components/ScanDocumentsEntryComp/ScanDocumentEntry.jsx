@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import  { decode } from 'html-entities';
+
+import { getContent } from './Helpers';
 
 import Button from "../ButtonComp/Button";
 
@@ -14,47 +15,10 @@ const ScanDocumentsEntry = ({newsContent, key}) => {
     const { name: sourceName } = source;
     const { isTechNews, isAnnouncement, isDigest, wordCount } = attributes;
 
-    const getImageUrl = (decodedContent) => {
-        let imgRegex = /<img[^>]*src="([^"]*)"/gm;
-
-        let matches = decodedContent.matchAll(imgRegex);
-        let images = '';
-
-        for(let match of matches){
-            if(match[1] !== '' && match[1].startsWith('https')) {
-                images = match;
-            }
-        }
-
-        return images ? images[1] : null
-    };
-
-    const decodeContent = (markup) => {
-        return decode(markup);
-    };
-
-    const removeAllTags = (contentText) => {
-        return contentText.replace(/<.*?>/g, ' ');
-    };
-
-    const getContent = () => {
-        const decodedContent = decodeContent(contentMarkup);
-        const noExtraSpacesContent = decodedContent.replace(/\s+/g, ' ');
-        const imgUrl = getImageUrl(decodedContent);
-        let textContent = '';
-
-        if (imgURL !== null ) {
-            textContent = removeAllTags(noExtraSpacesContent).slice(0, 700) + '...';
-        } else {
-            textContent = removeAllTags(noExtraSpacesContent).slice(0, 1000) + '...';
-        }
-
-        setDocText(textContent);
-        setImgURL(imgUrl);
-    }
-
     useEffect(() => {
-        getContent();
+        const { imgUrl, textContent } = getContent(contentMarkup);
+        setImgURL(imgUrl);
+        setDocText(textContent);
 
     }, [contentMarkup]);
 
@@ -68,7 +32,7 @@ const ScanDocumentsEntry = ({newsContent, key}) => {
                 <p className="document-entry_date">
                     {new Date(issueDate).toLocaleDateString()}
                 </p>
-                <a className="document-entry_source-link" href={url}>
+                <a className="document-entry_source-link" href={url} target="_blank" rel="noreferrer">
                     {sourceName}
                 </a>
             </div>
