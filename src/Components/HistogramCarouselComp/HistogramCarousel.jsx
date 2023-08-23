@@ -7,7 +7,6 @@ const CarouselContent = ({data}) => {
     const [isArrowActive, setIsArrowActive] = useState({left: false, right: false});
     const [visibleItems, setVisibleItems] = useState(10);
     const [itemWidth, setItemWidth] = useState(145);
-    const [isSingleItemVisible, setIsSingleItemVisible] = useState(false);
 
     const carouselContainerRef = useRef(null);
 

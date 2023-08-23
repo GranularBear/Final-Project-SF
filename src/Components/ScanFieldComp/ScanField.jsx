@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { parse, isValid } from 'date-fns';
 import { useAuth } from "../../AuthContext";
 
+import { validateTIN, validateDocumentQuantity, validateDates } from "./Helpers";
 
 import FieldInput from "../FieldInputComp/FieldInput";
 import Button from '../ButtonComp/Button';
@@ -11,7 +12,7 @@ import './ScanField.scss';
 
 const ScanField = (props) => {
     const navigate = useNavigate();
-    const { setLoadingHistogram, setHistogramData, isScanAttempted, setIsScanAttempted, setDocumentIDs, setIsLoggedIn }  = useAuth();
+    const { setLoadingHistogram, setHistogramData, setIsScanAttempted, setDocumentIDs, setIsLoggedIn }  = useAuth();
 
     const [TINValue, setTINValue] = useState(null);
     const [documentQuantityValue, setDocumentQuantityValue] = useState(null);
@@ -49,7 +50,6 @@ const ScanField = (props) => {
     }
 
     const handleTonalityChange = (option) => {
-
         if (option.label === 'Любая') {
             setTonality("any");
         } else if (option.label === 'Позитивная') {
@@ -62,96 +62,6 @@ const ScanField = (props) => {
     const handleCheckboxChange = (event) => {
         setCheckboxes({...checkboxes, [event.target.id]: event.target.checked})
     };
-
-    const validateTIN = (TIN) => {
-        let result = false;
-
-        if (TINValue === null || !TINValue.length) {
-            setTINError('Введите ИНН');
-            return result;
-        } else if (/[^0-9]/.test(TIN)) {
-            setTINError('ИНН может состоять только из цифр');
-            return result;
-        } else if ([10, 12].indexOf(TIN.length) === -1) {
-            setTINError('ИНН может состоять только из 10 или 12 цифр');
-            return result;
-        } else {
-            const checkDigit = (TIN, ratios) => {
-                let d = 0;
-                for (let i in ratios) {
-                    d += ratios[i] * TIN[i];
-                }
-                return parseInt(d % 11 % 10);
-            };
-            switch (TIN.length) {
-                case 10:
-                    const d10 = checkDigit(TIN, [2, 4, 10, 3, 5, 9, 4, 6, 8]);
-                    if (d10 === parseInt(TIN[9])) {
-                        result = true;
-                    }
-                    break;
-                case 12:
-                    const d11 = checkDigit(TIN, [7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
-                    const d12 = checkDigit(TIN, [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8]);
-                    if ((d11 === parseInt(TIN[10])) && (d12 === parseInt(TIN[11]))) {
-                        result = true;
-                    }
-                    break;
-                default: 
-                    result = false;
-                    setTINError('Введите корректный ИНН');
-            }
-            if (!result) {
-                setTINError('Неправильное контрольное число');
-            }
-        }
-        return result;
-    }
-
-    const validateDocumentQuantity = (documentQuantity) => {
-        let result = false;
-
-        if (documentQuantity === undefined || documentQuantity === null || documentQuantity.toString().length === 0) {
-            setDocumentQuantityError('Обязательное поле')
-            return result;
-        } else if (documentQuantity < 1 || documentQuantity > 1000) {
-            setDocumentQuantityError('Число вне диапозона')
-            return result;
-        } else {
-            result = true;
-            return result;
-        }
-    }
-
-    const validateDates = (firstDate, lastDate) => {
-        let result = false;
-        let currentDate = new Date();
-
-        currentDate.setHours(0,0,0,0);
-
-        if (!firstDate || !lastDate) {
-            setDatesError('Укажите необходимые даты');
-            return result;
-        } else {
-            firstDate.setHours(0,0,0,0);
-            lastDate.setHours(0,0,0,0);
-
-            if (firstDate > lastDate) {
-                setDatesError('Дата начала не может быть позднее даты конца');
-                return result;
-            } else if (firstDate > currentDate) {
-                setDatesError('Дата начала не может быть позднее текущей даты');
-                return result;
-            } else if (lastDate> currentDate) {
-                setDatesError('Дата конца не может быть позднее текущей даты');
-                return result;
-            } else {
-                result = true;
-                return result;
-            }
-        }
-
-    }
 
     const validateDateInputsOnBlur = (startDate, endDate) => {
         const parsedStartDate = parse(startDate, "dd/MM/yyyy", new Date());
@@ -167,9 +77,17 @@ const ScanField = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        setTINValid(validateTIN(TINValue));
-        setDocumentQuantityValid(validateDocumentQuantity(documentQuantityValue));
-        setDatesValid(validateDates(startDate, endDate));
+        const { TINValid, TINError } = validateTIN(TINValue);
+        setTINValid(TINValid);
+        setTINError(TINError);
+
+        const { DocumentQuantityValid, DocumentQuantityError } = validateDocumentQuantity(documentQuantityValue);
+        setDocumentQuantityValid(DocumentQuantityValid);
+        setDocumentQuantityError(DocumentQuantityError);
+
+        const { DatesValid, DatesError } = validateDates(startDate, endDate);
+        setDatesValid(DatesValid);
+        setDatesError(DatesError);
 
         setFormSubmitted(true);
 
